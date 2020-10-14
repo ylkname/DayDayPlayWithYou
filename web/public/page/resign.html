@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>用户注册-陪玩管理系统</title>
+    <base href="<%%>">
+    <meta name="keywords" content="用户注册,陪玩管理系统" />
+    <meta name="description" content="用户注册-陪玩管理系统">
+    <link href="//apps.bdimg.com/libs/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//public.openyy.com/Public/home/css/main-v2.css?v=28" rel="stylesheet">
+    <script src="//public.openyy.com/Public/home/js/html5shiv.min.js"></script>
+    <script src="//public.openyy.com/Public/home/js/respond.min.js"></script>
+    <style>
+        body{
+            background-color: #f5f5f5;
+        }
+    </style>
+    <meta name="__hash__" content="c2a2f9d0ca552b188642baf1e8a24601_51a09ddf46a42f80b7c43f074b522876" />
+    <script src="../js/jquery-3.2.1.js" type="text/javascript"></script>
+    <script type="text/javascript">
+                    function insert() {
+                        var yyid = $("#yyid").val();
+                        var name = $("#user").val();
+                        var password = $("#password").val();
+                        var password2 = $("#password2").val();
+                        var phone = $("#phone").val();
+                        var flag=check();
+                        if(flag==false){
+                            return;
+                        }
+                    $.ajax({
+                        url: "resign.do",
+                        type: "POST",
+                        data: "yyid=" + yyid + "&user=" + name + "&password=" + password + "&password2=" + password2 + "&phone=" + phone,
+                        success:function (data) {
+                            var json=JSON.parse(data);
+                            if(json.result=="1000"){
+                                alert(json.msg);
+                            }if(json.result="1001"){
+                                location.href="localhost:8080/UserMoudle/public/UserModuleHtml/login.html"
+                            }
+                        }
+                    })
+                  }
+               function check() {
+                   var yyid=document.getElementById("yyid").value;//验证账号
+                   var reg = /^[0-9]+$/;
+                   var user=document.getElementById("user").value;
+                   var userreg=/^[0-9a-zA-Z]*$/;
+                   var password=document.getElementById("password").value;
+                   var password2=document.getElementById("password2").value;
+                   var passwordreg=/^[0-9a-zA-Z]*$/;
+                   var phone=document.getElementById("phone").value;
+                   var phonereg=/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+                   if (yyid.length<9||yyid.length>12&!reg.test(yyid)) {
+                      alert("请输入正确的用户名为9-12为的数字");
+                       return  false;
+                   }else if(user.length>6||user<0&!userreg.test(user)){//昵称只能是0-6位的数字和字母
+                       alert("请输入正确的昵称");
+                       return false;
+                   } else if(password<9||password>12&&!passwordreg.test(password)){
+                       alert("请输入正确的密码格式");
+                       return false;
+                   }else if(password!=password2){
+                       alert("两次密码不一致");
+                       return false;
+                   }else if(phone.length!=11&&!phonereg.test(phone)){
+                       alert("请输入正确的手机格式");
+                       return false;
+                   }else if($("#check_name").is(':checked')==false){
+                        alert("请勾选");
+                        return false;
+                   }else {
+                        return true;
+                   }
+               }
+
+    </script>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbaar13" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" >
+                <img src="../image/index-img/yuewanlogo.png" alt=""  width="157px" height="43px">
+            </a>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container login register">
+    <div class="row">
+        <div class="col-md-6 col-sm-6 left hidden-xs">
+            <img src="//public.openyy.com/Public/home/images/img12.png" alt="">
+        </div>
+        <div class="col-md-6 col-sm-6 right hidden-xs-border">
+            <h3>用户注册</h3>
+            <form role="form"  id="reg_form" action="" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" value="" name="yyid" placeholder="登录帐号" required="" id="yyid" placeholder="账号由8-12位数字组成">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" value="" name="user" placeholder="昵称" required="" id="user">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" value="" name="password" required="" placeholder="密码（6-16个字符组成）" id="password">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" value="" name="password2" required="" placeholder="确认密码" id="password2">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" value="" name="phone" required="" placeholder="手机号码" id="phone">
+                </div>
+                <div class="checkbox">
+                    <label class="agree"><input type="checkbox" id="check_name" checked="" name="agree"> 我已同意<a href="Notice.html" id="xieyi">《陪玩管理系统陪玩网用户使用协议&网站公告》</a></label>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" id="bu1" onclick="insert()">免费注册</button>
+                </div>
+                <span > <a href="" >找回密码?</a></span>
+                <span class="form-group clearfix"><a href="login.jsp" class="pull-right">已有账号，直接登录&gt;</a></span>
+                <input type="hidden" name="__hash__" value="c2a2f9d0ca552b188642baf1e8a24601_51a09ddf46a42f80b7c43f074b522876" />
+            </form>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<footer class="container-fluid footer13 hidden-xs">
+    <div class="container footer13-1 hidden">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 part1">
+                <h3>帮助中心</h3>
+                <div class="con">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 part2">
+                <h3>传送门</h3>
+                <div class="con">
+                    <a href="###">帮助我们</a>
+                    <a href="###">高级弹幕</a>
+                    <a href="###">活动专题</a>
+                    <a href="###">侵权申诉</a>
+                    <a href="###">活动中心</a>
+                    <a href="###">反馈论坛</a>
+                    <a href="###">壁纸分享</a>
+                    <a href="###">名人殿堂</a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 part3">
+                <ul class="con clearfix">
+                    <li><a href=""><img src="//public.openyy.com/Public/home/images/ft132.png" alt="">新浪微博</a></li>
+                    <li><a href=""><img src="//public.openyy.com/Public/home/images/ft133.png" alt="">官方微信</a></li>
+                    <li><a href=""><img src="//public.openyy.com/Public/home/images/ft134.png" alt="">YY</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container footer13-2">
+        <!-- #xiaoguangbo -->
+        <div class="page-header">
+            <style>
+                .guangbobm,.guangbobn {
+                    margin-bottom: 10px;
+                }
+
+                .guangbobm {
+                    border: 1px solid #CDCDCD;
+                    background: #FFF;
+                }
+                .guangbobmw {
+                    border: 1px solid #CDCDCD;
+                }
+                .guangbofl {
+                    border: 1px solid #CDCDCD;
+                    background: #FFF;
+                }
+
+                .guangbofl .guangbobm {
+                    margin-bottom: 0;
+                    border: none;
+                }
+            </style>
+            <div class="guangbofl guangbobm">
+                <div class="guangbobm guangbobmw guangboflg guangbocl">
+                    <div id="laba" style="">
+                        <div style="width:99%;padding:0.5%;height:118px;overflow:auto;background:url(//public.openyy.com/Public/qwadmin/images/timg.jpeg)right bottom no-repeat;">
+                            <table style="width:100%">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /xiaoguangbo -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 left">
+                <p target="_blank">技术支持：xxxx-xxx QQ：111111111</p>
+                <p target="_blank">津ICP备1111111号-0</p>
+            </div>
+            <div class="col-xs-12 col-sm-6 right">
+                <p>违法不良信息举报邮箱 ： 123456@163.com</p>
+                <p>违法不良信息举报电话 ：000-000000</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="h60 hidden-lg"></div>
+
+
+
+<!--<div class="container footer-phone hidden-sm hidden-md hidden-lg">-->
+<!--    <div class="row">-->
+<!--        <div class="col-xs-4"><a href="/Home/Goods/index.jsp">-->
+<!--            <img src="//public.openyy.com/Public/home/images/ft191.png" alt="">-->
+<!--            <span >找陪玩</span>-->
+<!--        </a>-->
+<!--        </div>-->
+<!--        <div class="col-xs-4"><a href="/Home/Yungou/index.jsp">-->
+<!--            <img src="//public.openyy.com/Public/home/images/ft192.png" alt=""><span  >云购</span></a>-->
+<!--        </div>-->
+<!--        <div class="col-xs-4"><a href="/Home/User/index.jsp">-->
+<!--            <img src="//public.openyy.com/Public/home/images/ft193_hover.png" alt=""><span class="font-blue" >我的</span></a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+</body>
+</html>

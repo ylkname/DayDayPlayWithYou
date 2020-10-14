@@ -1,0 +1,340 @@
+<!DOCTYPE html><!--陪玩中心-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    </style>
+    <link rel="stylesheet" href="../css/lfty-ypw.css">
+    <script src="../js/jquery-3.2.1.js"></script>
+    <link rel="stylesheet" href="../util/layui-v2.4.5/layui/css/layui.css">
+    <script src="../util/layui-v2.4.5/layui/layui.js"></script>
+    <link rel="stylesheet" href="../util/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/head.css">
+    <link rel="stylesheet" href="../css/specialarea.css">
+    <script src="../util/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <style type="text/css">
+        #suggest {
+            position: absolute;
+            background-color: gainsboro;
+            text-align: left;
+            border: 1px solid #000000;
+        }
+    </style>
+    <script language="javascript">
+        $(function () {
+                $("#searchTXT").keyup(function () {
+                    var html='';
+                    $.getJSON("http://localhost:8080/DayDayPlay/search","action=findRoom&key="+$("#searchTXT").val(),
+                        function (data) {
+                            if(data.length==0){
+                                html+="<span>"+"查找不到该房间"+"</span>";
+                            }
+                            for(var i=0;i<data.length;i++){
+                                var url="detail.jsp?key="+data[i].Room_id;
+                                html+="<a href='"+url+"'>"+data[i].Room_id+"</a><br/>";
+                            }
+                            $("#suggest").html(html);
+                        }
+                    )
+                });
+            $.getJSON("http://localhost:8080/DayDayPlay/search","action=findALL",function (data) {
+                var html='';
+                if(data.length!=0){
+                    for(var i=0;i<data.length;i++){
+                        var url1;
+                        if(data[i].sex=="男"){
+                             url1="../image/tr/10.jpg";
+                        }else {
+                            url1="../image/tr/11.jpg";
+                        }
+                        var url="detail.jsp?key="+data[i].Room_id;
+                        html+="<a href='"+url+"'>"+"<div class='specialarea-body-show'><div class='specialarea-body-show-navgation'>"+
+                            "<img src='"+url1+"' class='specialarea-body-show-navgation-img'><div class=\'specialarea-body-show-body\'>"+
+                            "<div class='div1'><img src=''../image/tr/woman.png' class='specialarea-body-show-body-img1'>&nbsp22</div>"+
+                            "<div class='div2'>"+data[i].Game_grade+"</div></div></div>"+
+                            "<div class='specialarea-body-show-foot'>"+data[i].name+"</div><div class='specialarea-body-show-foot1'>"+ "</span>"+
+                            "<span class='specialarea-body-show-foot1-span3'>"+data[i].Game_name+
+                            "<span class='specialarea-body-show-foot1-span3'>"+"￥"+"</span>"+
+                            "<span class='specialarea-body-show-foot1-span4'>"+data[i].price+"</span>"+
+                            "<span class='specialarea-body-show-foot1-span5'>/局</span></div></div></a>";
+                    }
+                }
+                $("#specialarea-body").html(html);
+            });
+            $(".p1").click(function () {
+                $.getJSON("http://localhost:8080/DayDayPlay/search","action=findSearchName&key="+$(this).html(),function (data) {
+                    var html='';
+                    // $("#specialarea-body").html(html);
+                    if(data.length!=0){
+                        for(var i=0;i<data.length;i++){
+                            var url1;
+                            if(data[i].sex=="男"){
+                                url1="../image/tr/10.jpg";
+                            }else {
+                                url1="../image/tr/11.jpg";
+                            }
+                            var url="detail.jsp?key="+data[i].Room_id;
+                            html+="<a href='"+url+"'>"+"<div class='specialarea-body-show'><div class='specialarea-body-show-navgation'>"+
+                                "<img src='"+url1+"' class='specialarea-body-show-navgation-img'><div class=\'specialarea-body-show-body\'>"+
+                                "<div class='div1'><img src=''../image/tr/man.png' class='specialarea-body-show-body-img1'>&nbsp22</div>"+
+                                "<div class='div2'>"+data[i].Game_grade+"</div></div></div>"+
+                                "<div class='specialarea-body-show-foot'>"+data[i].name+"</div><div class='specialarea-body-show-foot1'>"+ "</span>"+
+                                "|<span class='specialarea-body-show-foot1-span3'>" +data[i].Game_name+
+                                "<span class='specialarea-body-show-foot1-span3'>"+"￥"+"</span>"+
+                                "<span class='specialarea-body-show-foot1-span4'>"+data[i].price+"</span>"+
+                                "<span class='specialarea-body-show-foot1-span5'>/局</span></div></div></a>";
+                        }
+                    }
+                    $("#specialarea-body").html(html);
+                })
+            });
+            $(".p2").click(function () {
+                $.getJSON("http://localhost:8080/DayDayPlay/search","action=findSearchGrade&key="+$(this).html(),function (data) {
+                    var html='';
+                    $("#specialarea-body").html(html);
+                    if(data.length!=0){
+                        for(var i=0;i<data.length;i++){
+                            var url1;
+                            if(data[i].sex=="男"){
+                                url1="../image/tr/10.jpg";
+                            }else {
+                                url1="../image/tr/11.jpg";
+                            }
+                            var url="detail.jsp?key="+data[i].Room_id;
+                            html+="<a href='"+url+"'>"+"<div class='specialarea-body-show'><div class='specialarea-body-show-navgation'>"+
+                                "<img src='"+url1+"' class='specialarea-body-show-navgation-img'><div class=\'specialarea-body-show-body\'>"+
+                                "<div class='div1'><img src=''../image/tr/woman.png' class='specialarea-body-show-body-img1'>&nbsp22</div>"+
+                                "<div class='div2'>"+data[i].Game_grade+"</div></div></div>"+
+                                "<div class='specialarea-body-show-foot'>"+data[i].name+"</div><div class='specialarea-body-show-foot1'>"+ "</span>"+
+                                "|<span class='specialarea-body-show-foot1-span3'>" +data[i].Game_name+
+                                "<span class='specialarea-body-show-foot1-span3'>"+"￥"+"</span>"+
+                                "<span class='specialarea-body-show-foot1-span4'>"+data[i].price+"</span>"+
+                                "<span class='specialarea-body-show-foot1-span5'>/局</span></div></div></a>";
+                        }
+                    }
+                    $("#specialarea-body").html(html);
+                })
+            });
+        })
+    </script>
+</head>
+<body>
+<div class="section">
+    <!--头部-->
+    <div class="head-nav">
+        <div class="index-head">
+            <!--logo部分-->
+            <div class="index-logo">
+                <a href="index.jsp">
+                    <img src="../image/index-img/yuewanlogo.png" alt="">
+                </a>
+            </div>
+            <!--导航内容部分-->
+            <div class="header-navigation">
+                <a href="index.jsp" class="navigation-1 ar">首页</a>
+                <a href="playwithbeauty.html" class="navigation-1 ar">约陪玩</a>
+                <a href="recharge.jsp" class="navigation-1 ar">充值</a>
+                <div class="header-navigation-ip">
+                    <input type="text" placeholder="房间号" id="searchTXT">
+                    <img src="../image/index-img/search.png" class="search" >
+                    <div id="suggest" style="width: 180px"></div>
+                </div>
+            </div>
+            <div class="header-navigation">
+                <a class="ar" href="">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    登录&nbsp;&nbsp;|&nbsp;&nbsp;注册</a>
+            </div>
+            <div class="header-navigation" >
+                <a href="" class="ar">
+                    <img src="../image/index-img/message.png" alt="">
+                    信息中心
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--面包屑-->
+    <div class="crumbs-nav">
+        <div class="nav-list">
+            <a href="" title="天天陪玩">首页</a>
+            <img src="" alt=""><img src="../images/the-third-pic/the-third-game/ico_03.png" height="7" width="4"/>
+        </div>
+    </div>
+    <!--筛选栏-->
+    <div class="list-nav">
+        <div class="info">
+            <!--游戏类型-->
+            <div class="info-box">
+                <div class="left-tit">
+                    <p class="nav-list-font">游戏类型</p>
+                </div>
+                <div class="right-box right-box11  flex-item">
+                    <ul class="style2 on">
+                        <li>
+                            <span class="p1">不限</span>
+                        </li>
+                        <li>
+                            <span class="p1">英雄联盟</span>
+                        </li>
+                        <li >
+                            <span class="p1">绝地求生</span>
+                        </li>
+                        <li>
+                            <span class="p1">守望先锋</span>
+                        </li>
+                        <li>
+                            <span class="p1">王者荣耀</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box level">
+                <div class="left-tit">
+                    <p class="nav-list-font">选择等级</p>
+                </div>
+                <div class="right-box style3">
+                    <!--lol等级-->
+                    <ul class="style2 on" >
+                        <li >
+                            <span class="p2">不限</span>
+                        </li>
+                        <li >
+                            <span class="p2">萌新</span>
+                        </li>
+                        <li>
+                            <span class="p2">中级</span>
+                        </li>
+                        <li>
+                            <span class="p2">高级</span>
+                        </li>
+                        <li>
+                            <span class="p2">大神</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="sort-box">
+            <div class="sort-info" id="screening">
+                <!--综合排序-->
+                <div class="all active-1 box oth_btn " >
+                    综合排序
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--内容展示-->
+    <div class="main">
+        <div>
+            <article>
+                <div id="specialarea-body">
+
+                </div>
+            </article>
+            <!--周榜-->
+            <aside>
+                <div class="info2">
+                    <div class="tit-box">
+                        <div class="txt1">
+                            <span>人气</span>
+                            <i></i>
+                            周榜
+                        </div>
+                    </div>
+
+                    <div class="wrap">
+                        <div class="list-box1 list-box2">
+                            <--单个主播推荐-->
+                            <div class="list style1">
+                                <a href="" class="pic-box">
+                                    <img src="" alt="" class="pic-3">
+                                    <img src="" alt="" class="mask">
+                                </a>
+                                <div class="txt">
+                                    <div class="one-txt-cut">
+                                        会撩人的电竞女友
+                                    </div>
+                                    <p>
+                                        时长:
+                                        <span>581</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="info2">
+                    <div class="tit-box">
+                        <div class="txt1">
+                            <span>魅力</span>
+                            <i></i>
+                            周榜
+                        </div>
+                    </div>
+                    <div class="wrap">
+                        <div class="list-box1 list-box3">
+                            <!--单个主播推荐-->
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+    </div>
+    <!--尾部-->
+    <div class="index-bottom">
+        <div class="index-bottom-box">
+            <a href="javascript:;">
+                <img class="fl" src="../image/index-img/consume1.jpg" alt="">
+            </a>
+            <a href="javascript:;">
+                <img class="fl" src="../image/index-img/consume2.jpg" alt="">
+            </a>
+            <a href="javascript:;">
+                <img class="fl" src="../image/index-img/consume3.jpg" alt="">
+            </a>
+            <a href="javascript:;">
+                <img class="fl" src="../image/index-img/consume4.jpg" alt="">
+            </a>
+            <div class="clearfix"></div>
+            <div class="bottom-box-information">
+                <div class="bottom-box-tel fl">
+                    <i class="bottom-box-telimg"></i>
+                    客服电话
+                    <span class="bottom-box-tn">010-68608228</span>
+                    <span class="bottom-box-t">咨询时间：7X24小时</span>
+                </div>
+                <div class="bottom-box-qq fl">
+                    <i class="bottom-box-qqimg"></i>
+                    客服QQ：
+                    <span class="bottom-box-qqnum">800184580</span>
+                </div>
+                <div class="bottom-box-detailed fl">
+                    <span class="bottom-box-detailedtime">咨询时间：7X24小时</span>
+                </div>
+                <div class="bottom-box-but fl">
+                    <a class="fl help" href="javascript:;">帮助中心</a>
+                    <a class="fl help" href="javascript:;">服务保障</a>
+                    <a class="fl help" href="javascript:;">关于我们</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="bottom-box-copy">
+                京ICP备18042855号 Copyright 2014-2020 TaoLe Corporation,All Rights Reserved
+                <br>
+                北京陶乐科技有限公司，专业陪练为玩家提供各种热门游戏陪练陪玩服务，年轻人喜爱的游戏陪玩平台
+                <br>
+                地址：北京市石景山区鲁谷路74号中国瑞达大厦6层M601室
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+
+</script>
+</html>

@@ -1,0 +1,281 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#specialarea-carousel-tab img:hover {
+  cursor: pointer;
+}
+#specialarea-carousel-tab #specialarea-carousel-tab1 {
+  position: absolute;
+  top: 402px;
+  left: 50px;
+}
+#specialarea-carousel-tab #specialarea-carousel-tab2 {
+  position: absolute;
+  top: 402px;
+  left: 50px;
+  display: none;
+}
+#specialarea-carousel-tab #specialarea-carousel-tab3 {
+  position: absolute;
+  top: 402px;
+  left: 275px;
+  display: none;
+}
+#specialarea-carousel-tab #specialarea-carousel-tab4 {
+  position: absolute;
+  top: 402px;
+  left: 275px;
+}
+
+#specialarea-body-lol {
+  margin: 140px auto;
+  width: 100%;
+  background: rgba(204, 204, 204, 0.3);
+  overflow: hidden;
+}
+#specialarea-body-lol a {
+  width: 236px;
+  height: 330px;
+  background: #ffffff;
+  margin: 20px 16px;
+  margin-bottom: 20px;
+  position: relative;
+  float: left;
+  text-decoration: none;
+  color: #000;
+}
+#specialarea-body-lol a:hover {
+  box-shadow: 0 0 30px #888888;
+}
+#specialarea-body-lol a .specialarea-body-show {
+  width: 236px;
+  height: 331px;
+}
+#specialarea-body-lol a .specialarea-body-show .specialarea-body-show-navgation {
+  width: 236px;
+  height: 233px;
+}
+#specialarea-body-lol a .specialarea-body-show .specialarea-body-show-navgation .specialarea-body-show-navgation-img {
+  width: 236px;
+  height: 233px;
+}
+#specialarea-body-lol a .specialarea-body-show .specialarea-body-show-navgation .specialarea-body-show-body {
+  position: absolute;
+  top: 200px;
+  left: 160px;
+}
+#specialarea-body-lol a .specialarea-body-show .specialarea-body-show-navgation .specialarea-body-show-body .div1 {
+  background: deepskyblue;
+  color: #ffffff;
+  width: 35px;
+  height: 20px;
+  float: left;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 3px;
+}
+#specialarea-body-lol a .specialarea-body-show .specialarea-body-show-navgation .specialarea-body-show-body .div2 {
+  background: plum;
+  color: #ffffff;
+  width: 35px;
+  height: 20px;
+  float: left;
+  margin-left: 3px;
+  border-radius: 3px;
+}
+#specialarea-body-lol a .specialarea-body-show .specialarea-body-show-foot {
+  font-size: 22px;
+  margin: 5px 0;
+}
+#specialarea-body-lol a .specialarea-body-show .specialarea-body-show-foot1 {
+  margin-top: 20px;
+}
+#specialarea-body-lol a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span1 {
+  color: skyblue;
+  margin: 20px 5px 0 0 ;
+}
+#specialarea-body-lol a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span2 {
+  margin-left: 5px;
+}
+#specialarea-body-lol a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span3 {
+  margin-left: 30px;
+  color: red;
+  font-size: 18px;
+}
+#specialarea-body-lol a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span4 {
+  color: red;
+  font-size: 28px;
+}
+#specialarea-body-lol a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span5 {
+  color: red;
+  font-size: 18px;
+}
+#specialarea-body-cj {
+  margin: 140px auto;
+  width: 100%;
+  background: rgba(204, 204, 204, 0.3);
+  overflow: hidden;
+  display: none;
+}
+#specialarea-body-cj a {
+  width: 236px;
+  height: 330px;
+  background: #ffffff;
+  margin: 20px 16px;
+  margin-bottom: 20px;
+  position: relative;
+  float: left;
+  text-decoration: none;
+  color: #000;
+}
+#specialarea-body-cj a:hover {
+  box-shadow: 0 0 30px #888888;
+}
+#specialarea-body-cj a .specialarea-body-show {
+  width: 236px;
+  height: 331px;
+}
+#specialarea-body-cj a .specialarea-body-show .specialarea-body-show-navgation {
+  width: 236px;
+  height: 233px;
+}
+#specialarea-body-cj a .specialarea-body-show .specialarea-body-show-navgation .specialarea-body-show-navgation-img {
+  width: 236px;
+  height: 233px;
+}
+#specialarea-body-cj a .specialarea-body-show .specialarea-body-show-navgation .specialarea-body-show-body {
+  position: absolute;
+  top: 200px;
+  left: 160px;
+}
+#specialarea-body-cj a .specialarea-body-show .specialarea-body-show-navgation .specialarea-body-show-body .div1 {
+  background: deepskyblue;
+  color: #ffffff;
+  width: 35px;
+  height: 20px;
+  float: left;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 3px;
+}
+#specialarea-body-cj a .specialarea-body-show .specialarea-body-show-navgation .specialarea-body-show-body .div2 {
+  background: plum;
+  color: #ffffff;
+  width: 35px;
+  height: 20px;
+  float: left;
+  margin-left: 3px;
+  border-radius: 3px;
+}
+#specialarea-body-cj a .specialarea-body-show .specialarea-body-show-foot {
+  font-size: 22px;
+  margin: 5px 0;
+}
+#specialarea-body-cj a .specialarea-body-show .specialarea-body-show-foot1 {
+  margin-top: 20px;
+}
+#specialarea-body-cj a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span1 {
+  color: skyblue;
+  margin: 20px 5px 0 0 ;
+}
+#specialarea-body-cj a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span2 {
+  margin-left: 5px;
+}
+#specialarea-body-cj a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span3 {
+  margin-left: 30px;
+  color: red;
+  font-size: 18px;
+}
+#specialarea-body-cj a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span4 {
+  color: red;
+  font-size: 28px;
+}
+#specialarea-body-cj a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span5 {
+  color: red;
+  font-size: 18px;
+}
+#specialarea-body {
+  margin: 20px auto;
+  width: 100%;
+  background: rgba(204, 204, 204, 0.3);
+  overflow: hidden;
+}
+#specialarea-body a {
+  width: 236px;
+  height: 330px;
+  background: #ffffff;
+  margin: 20px 16px;
+  margin-bottom: 20px;
+  position: relative;
+  float: left;
+  text-decoration: none;
+  color: #000;
+}
+#specialarea-body a:hover {
+  box-shadow: 0 0 30px #888888;
+}
+#specialarea-body a .specialarea-body-show {
+  width: 236px;
+  height: 331px;
+}
+#specialarea-body a .specialarea-body-show .specialarea-body-show-navgation {
+  width: 236px;
+  height: 233px;
+}
+#specialarea-body a .specialarea-body-show .specialarea-body-show-navgation .specialarea-body-show-navgation-img {
+  width: 236px;
+  height: 233px;
+}
+#specialarea-body a .specialarea-body-show .specialarea-body-show-navgation .specialarea-body-show-body {
+  position: absolute;
+  top: 200px;
+  left: 160px;
+}
+#specialarea-body a .specialarea-body-show .specialarea-body-show-navgation .specialarea-body-show-body .div1 {
+  background: deepskyblue;
+  color: #ffffff;
+  width: 35px;
+  height: 20px;
+  float: left;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 3px;
+}
+#specialarea-body a .specialarea-body-show .specialarea-body-show-navgation .specialarea-body-show-body .div2 {
+  background: plum;
+  color: #ffffff;
+  width: 35px;
+  height: 20px;
+  float: left;
+  margin-left: 3px;
+  border-radius: 3px;
+}
+#specialarea-body a .specialarea-body-show .specialarea-body-show-foot {
+  font-size: 22px;
+  margin: 5px 0;
+}
+#specialarea-body a .specialarea-body-show .specialarea-body-show-foot1 {
+  margin-top: 20px;
+}
+#specialarea-body a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span1 {
+  color: skyblue;
+  margin: 20px 5px 0 0 ;
+}
+#specialarea-body a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span2 {
+  margin-left: 5px;
+}
+#specialarea-body a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span3 {
+  margin-left: 30px;
+  color: red;
+  font-size: 18px;
+}
+#specialarea-body a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span4 {
+  color: red;
+  font-size: 18px;
+}
+#specialarea-body a .specialarea-body-show .specialarea-body-show-foot1 .specialarea-body-show-foot1-span5 {
+  color: red;
+  font-size: 18px;
+}

@@ -1,0 +1,358 @@
+<!DOCTYPE html><!--下单界面-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/xmorder.css">
+    <script src="../util/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
+    <script src="../js/gettime.js"></script>
+</head>
+<body>
+<div style="overflow: hidden">
+    <div class="order-navgation">
+            我的订单
+    </div>
+    <div class="order-box">
+        <div class="order-box-navgation">
+            订单信息
+        </div>
+        <div class="order-box-hr"></div>
+        <div class="order-box-body">
+            <ul class="order-box-body-ul1  clearfix">
+                <li class="li1">订单编号</li>
+                <li class="li2">昵称</li>
+                <li class="li3">游戏名</li>
+                <li class="li4">单价(元/局)</li>
+                <li class="li5">购买数量</li>
+                <li class="li6">总价</li>
+            </ul>
+            <!--<ul class="order-box-body-ul2">
+            &lt;!&ndash; <li  class="li1">
+                                <img src="../image/tr/11.jpg" alt="" width="80" height="80">
+                            </li>&ndash;&gt;
+            </ul>-->
+            <!--<ul class="order-box-body-ul3">-->
+                <!--<li id="li">-->
+                    <!--<textarea maxlength="30" placeholder="备注说明：注意事项......"></textarea>-->
+                    <!--<p class="p1">0/30</p>-->
+                <!--</li>-->
+            <!--</ul>-->
+            <table style="background-color: navajowhite;width: 1100px;text-align: center" id="table">
+
+            </table>
+        </div>
+    </div>
+    <div class="order-box1">
+        <div class="order-box1-text">支付方式</div>
+        <div class="order-box1-hr"></div>
+        <div class="order-box1-body">
+            <div class="order-box1-body-cash" data-index="0">
+                <img src="../image/tr/ico_pay1.png" alt="">
+                <span>余额支付</span> 
+                <p>余额:</p>
+            </div>
+            <div class="order-box1-body-wx">
+                <img src="../image/tr/ico_pay3.png" alt="">
+                <span>微信支付</span>
+            </div>
+            <div class="order-box1-body-zfb">
+                <img src="../image/tr/ico_pay2.png" alt="">
+                <span>支付宝支付</span>
+            </div>
+        </div>
+    </div>
+    <div class="order-foot">
+        <div class="order-foot-pay">
+            <span class="order-foot-pay-span">实付金额：</span><span class="order-foot-pay-span">￥30</span>
+            <span class="order-foot-pay-span1"></span>
+        </div>
+        <div class="order-foot-btn">
+            提交订单
+        </div>
+    </div>
+</div>
+</body>
+<script>
+
+    function xmgetpag(aaa){
+        $('.order-box-body-ul2').append(`
+            <li class="li1">${aaa.JD}</li>
+            <li class="li2">${aaa.PFname}</li>
+            <li class="li3">${aaa.PGname}</li>
+            <li class="li4"> <span>￥</span> <span id="span">${aaa.Pprice}</span> </li>
+            <li class="li5">${aaa.XDsum}</li>
+            <li class="li6"><span>￥</span> <span id="span1">${aaa.XDmoney}</span></li>
+                <!--<li class="li1">订单编号</li>
+                <li class="li2">昵称</li>
+                <li class="li3">游戏名</li>
+                <li class="li4">单价(元/局)</li>
+                <li class="li5">购买数量</li>
+                <li class="li6">总价</li>-->
+        `)
+    }
+
+    $(document).ready(function () {
+        var oDataname=parseInt(localStorage.xmpayddnum);
+        var U_id=parseInt(localStorage.myID);
+        // var U_id=parseInt(U_id1);
+        // alert(typeof oDataname)
+        // alert(typeof U_id)
+        $.ajax({
+            url:'/userController?count=1',
+            type:'post',
+            data:{
+                JD_co:oDataname,
+                U_id:U_id,
+            },
+            success:function (res){
+                if (res.error) {
+                    alert(res.xmjxorder);
+                } else {
+                    xmgetpag(res.data[0]);
+                    $('.order-foot-pay-span1').text(res.data[0].XDmoney)
+                }
+            }
+        });
+    });
+
+$('.order-foot-btn').click(function () {
+    alert("确定下单？");
+    var oDataname=parseInt(localStorage.xmpayddnum);
+    var oGettime=clock();
+    // var U_id=parseInt(localStorage.myID);
+        $.ajax({
+            url:'/userController?count=1',
+            type:'post',
+            data:{
+                JD_co:oDataname,
+                // U_id:U_id,
+                JD_puon:'待接单',
+                XDzfdate:oGettime
+            },
+            success:function (res){
+                if (res.error) {
+                    if(confirm('支付失败，你需要继续支付吗')){
+                        // location.href='http://localhost:5000/page/xmjxorder.html'
+                    }
+                } else {
+                   alert('支付成功');
+                    localStorage.removeItem('xmpayddnum')
+                }
+            }
+        })
+    window.location = "../page/Master_Edition.jsp";
+})
+
+</script>
+
+<!--<script>-->
+    <!--let oMoney=$('.order-foot-pay-span1');-->
+    <!--let oDiv=$('.order-box1-body div');-->
+    <!--function show(data){-->
+        <!--$('.order-box1-body-cash p').html(`余额:${data.余额}`)-->
+    <!--}-->
+    <!--function show1(res){-->
+        <!--$('.order-box-foot').html(`-->
+        <!--<div class="order-box-foot-phone">-->
+                    <!--<img src="../image/tr/ico_33.png" alt="">-->
+                    <!--手机: <input type="text" value="${res[0].U_tel}"><span>(必填)</span>-->
+                <!--</div>-->
+                <!--<div class="order-box-foot-qq">-->
+                    <!--<img src="../image/tr/ico_31.png" alt="">-->
+                    <!--QQ: <input type="text" value="${res[0].U_qq}"><span>(必填)</span>-->
+                <!--</div>-->
+                <!--<div class="order-box-foot-wx">-->
+                    <!--<img src="../image/tr/ico_32.png" alt="">-->
+                    <!--微信: <input type="text" value="${res[0].U_wechat}"><span>(选填)</span>-->
+                <!--</div>-->
+        <!--`)-->
+    <!--}-->
+    <!--$(document).ready(function(){-->
+        <!--$.ajax({-->
+            <!--url:'/orderPeiWan',-->
+            <!--type:'get',-->
+            <!--data:{-->
+                <!--id:111111,-->
+                <!--type:1,-->
+            <!--},-->
+            <!--success:function(res){-->
+                <!--res.error?console.log('数据库错误'):(function(){-->
+                    <!--$('.order-box-body-ul2').append(`-->
+                    <!--<li  class="li1">-->
+                        <!--<img src="${res[0].U_photo}" alt="" width="80" height="80">-->
+                    <!--</li>-->
+                    <!--<li class="li2">${res[0].U_falsename}</li>-->
+                    <!--<li class="li3">${res[0].G_names}</li>-->
+                    <!--<li class="li4"> <span>￥</span> <span id="span">9.90</span> </li>-->
+                    <!--<li class="li5"><span class="order-box-body-ul2-left">-</span><input type="text" value="1"><span class="order-box-body-ul2-right">+</span></li>-->
+                    <!--<li class="li6"><span>￥</span> <span id="span1">9.90</span>-->
+                    <!--`)-->
+                    <!--show1(res)-->
+                <!--}())-->
+            <!--}-->
+        <!--})-->
+    <!--})-->
+        <!---->
+        <!--$('.order-box-body-ul2').on('click','.order-box-body-ul2-left',function(){-->
+            <!--let oInp=$('.order-box-body-ul2 input');-->
+            <!--let oPay=$('.order-box-body-ul2 .li6 #span1');-->
+            <!--let oPrice=$('.order-box-body-ul2 .li4 #span');-->
+            <!---->
+            <!--if(oInp.val()==0){-->
+                <!--oInp.val(0)-->
+            <!--}else{-->
+                <!--oInp.val(oInp.val()-1);-->
+            <!--};-->
+            <!--oPay.text(parseInt(oInp.val())*parseInt(oPrice.text())+'.00');-->
+            <!--oMoney.text(oPay.text());-->
+        <!--})-->
+        <!--$('.order-box-body-ul2').on('click','.order-box-body-ul2-right',function(){-->
+            <!--let oInp=$('.order-box-body-ul2 input');-->
+            <!--let oPay=$('.order-box-body-ul2 .li6 #span1');-->
+            <!--let oPrice=$('.order-box-body-ul2 .li4 #span');-->
+            <!---->
+            <!--oInp.val(parseInt(oInp.val())+1);-->
+            <!--oPay.text(parseInt(oInp.val())*parseInt(oPrice.text())+'.00');-->
+            <!--oMoney.text(oPay.text());-->
+        <!--})-->
+       <!---->
+    <!--$('.order-box1-body').on('click','div',function(){-->
+        <!---->
+        <!--$.each(oDiv,function(i,v){-->
+                <!--$(v).css({-->
+                    <!--'border':'1px solid #d7d7d7'-->
+                <!--})-->
+                <!--$(v).find($('span')).css({-->
+                    <!--'color': 'black'-->
+                <!--})-->
+                <!--$(v).find($('p')).css({-->
+                    <!--'display':'none'-->
+                <!--})-->
+                <!--$(v).css({-->
+                    <!--'border':'1px solid #d7d7d7'-->
+                <!--})-->
+        <!--})-->
+        <!--if($('.order-box1-body-cash').attr('data-index')==0){-->
+            <!--$(this).css({-->
+                    <!--'border':'1px solid #ff5d42'-->
+                <!--})-->
+                <!--$(this).find($('span')).css({-->
+                    <!--'display':'inline-block',-->
+                    <!--'color':'#ff5d42'-->
+                <!--})-->
+                <!--$(this).find($('p')).css({-->
+                    <!--'display':'inline-block'-->
+                <!--})-->
+                <!--$.ajax({-->
+                    <!--url:'/orderMoney',-->
+                    <!--type:'post',-->
+                    <!--data:{-->
+                        <!--id:'客户id'-->
+                    <!--},-->
+                    <!--success:function(res){-->
+                        <!--res.error?console.log('数据库错误'):(function(){-->
+                            <!--show(res.data)-->
+                        <!--}())-->
+                    <!--}-->
+                <!--})-->
+        <!--}else{-->
+            <!--$(this).css({-->
+                    <!--'border':'1px solid #f5501e',-->
+                <!--})-->
+                <!--$(this).find($('span')).css({-->
+                    <!--'color':'#ff5d42'-->
+                <!--})-->
+        <!--}-->
+    <!--})-->
+    <!--function toDub(n) {-->
+        <!--return n<10?'0'+n:''+n;-->
+    <!--}-->
+    <!--function clock(){-->
+        <!--var oDate=new Date();-->
+
+        <!--var y=oDate.getFullYear();-->
+        <!--var M=oDate.getMonth()+1;-->
+        <!--var d=oDate.getDate();-->
+
+        <!--var h=oDate.getHours();-->
+        <!--var m=oDate.getMinutes();-->
+        <!--var s=oDate.getSeconds();-->
+
+        <!--// var week=oDate.getDay();  //0-6-->
+
+        <!--// var arr=['日','一','二','三','四','五','六'];-->
+
+
+        <!--var oDATA=`${y}-${toDub(M)}-${toDub(d)} ${toDub(h)}:${toDub(m)}:${toDub(s)}`;-->
+        <!--return oDATA;-->
+    <!--}-->
+    <!---->
+    <!--$('.order-foot-btn').click(function(){-->
+        <!--if(confirm("是否提交订单")){-->
+            <!--let date=clock();-->
+            <!--let money=$('.order-foot-pay-span1').text().split('.')[0];-->
+            <!--$.ajax({-->
+                <!--url:'/getorder',-->
+                <!--type:'post',-->
+                <!--data:{-->
+                    <!--id:1,-->
+                    <!--date:date,-->
+                    <!--stata:"进行中",-->
+                    <!--money:money-->
+                <!--},-->
+                <!--success:function(res){-->
+                    <!--res.error?console.log('数据库错误'):console.log('数据传输成功')-->
+                <!--}-->
+            <!--})-->
+        <!--}else{-->
+            <!--let date=clock();-->
+            <!--let money=$('.order-foot-pay-span1').text();-->
+            <!--$.ajax({-->
+                <!--url:'/cancelorder',-->
+                <!--type:'post',-->
+                <!--data:{-->
+                    <!--id:1,-->
+                    <!--date:date,-->
+                    <!--stata:"待支付",-->
+                    <!--money:money-->
+                <!--},-->
+                <!--success:function(res){-->
+                        <!--res.error?console.log('数据库错误'):console.log('数据传输成功')-->
+                <!--}-->
+            <!--})-->
+        <!--}-->
+    <!--})-->
+<!--</script>-->
+
+</html>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            url: "searchPlayOrder.doing",
+            dataType: "json",
+            success: function (data) {
+                $("#table").empty();
+                $.each(data, function (index, element) {
+                    var url="searchPlayOrder.doing?id="+element.id;
+                    $("#table").append("<tr><td>"+element.order_num+"</td>" +
+                        "<td>"+element.playmen_name+"</td>" +
+                        "<td>"+element.game_name+"</td>" +
+                        "<td>"+element.price+"</td>" +
+                        "<td>"+element.num+"</td>" +
+                        "<td>"+element.all_price+"</td></tr>");
+                })
+            }/*,
+            error: function (data) {
+                $("#table").append("<tr><td>10001</td>" +
+                    "<td>小红</td>" +
+                    "<td>英雄联盟</td>" +
+                    "<td>10</td>" +
+                    "<td>3</td>" +
+                    "<td>30</td></tr>");
+            }*/
+        })
+    })
+</script>

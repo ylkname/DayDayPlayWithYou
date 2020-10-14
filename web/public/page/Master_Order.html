@@ -1,0 +1,602 @@
+<!DOCTYPE html><!--订单信息-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/DayDayPlay/public/util/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="/DayDayPlay/public/util/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/DayDayPlay/public/js/jquery-3.2.1.js"></script>
+    <!--时间-->
+    <script src="../js/gettime.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            text-decoration: none;
+            color: #666666;
+        }
+        body{
+            background: #f3f3f3;
+            height: 100%;
+        }
+        #order_box{
+            /*background: #f3f3f3;*/
+            width: 1186px;
+            background: #f3f3f3;
+            /*height: 100%;*/
+            overflow: hidden;
+        }
+        #order-content{
+            padding: 30px 80px 30px 80px;
+            margin-top: 30px;
+            margin-right: 30px;
+            margin-bottom: 30px;
+            background-color: #fff;
+            border: #f3f3f3;
+            min-width: 1020px;
+            /*height: 100%;*/
+            margin-left: 40px;
+            border-radius: 7px;
+            overflow: hidden;
+        }
+        /*<!--订单头部信息-->*/
+        #orderTop{
+            width: 951px;
+            overflow: hidden;
+            background: #fff;
+            /*padding-bottom: 20px;*/
+        }
+        /*<!--陪玩订单或者我的订单-->*/
+        .order-title,.order-screen{
+            width: 950px;
+            /*height: 54px;*/
+        }
+        .order-title a{
+            color: #172c45;
+            text-decoration: none;
+            width: 80px;
+            height: 49px;
+            display: inline-block;
+        }
+        .order-title span{
+            width: 1px;
+            display: inline-block;
+            height: 19px;
+            background: #172c45;
+            margin:20px 5px 10px 0;
+        }
+        .order-title h3{
+            float: left;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .order-title h3.active{
+            color: #F5511E;
+        }
+        /*查询*/
+        .order-screen{
+            width: 950px;
+            height: 29px;
+            margin: 0 auto;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .s{
+            float: left;
+        }
+        .s input{
+            border-radius:8px;
+            height: 26px;
+            outline: none;
+            border: 1px solid #fbca99;
+        }
+        /*筛选*/
+        .litnav{
+            float: right;
+        }
+        .litnav a{
+            float: left;
+            width: 96px;
+            height: 26px;
+            box-sizing: border-box;
+            border: solid 1px #fbca99;
+            border-radius: 3px;
+            margin-left: 10px;
+            line-height: 24px;
+            text-align: center;
+            color: #172c45;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .litnav a.active{
+            border-left: solid 5px #ffa040;
+        }
+        /*内容*/
+        .order-con-head{
+            width: 950px;
+            height: 45px;
+            margin: 0 auto;
+            position: relative;
+            margin-top: 10px;
+        }
+        /*两条线*/
+        .line1{
+            top: 0;
+            display: block;
+            position: absolute;
+            left: 0;
+            max-width: 100%;
+            border: 0;
+            vertical-align: middle;
+        }
+        .line2{
+            bottom: 0;
+            display: block;
+            position: absolute;
+            left: 0;
+            max-width: 100%;
+        }
+        /*头部ul*/
+        .info{
+            width: 100%;
+            height: 43px;
+            position: absolute;
+            left: 0;
+            top: 1px;
+        }
+        /*表头*/
+        .info li{
+            float: left;
+            text-align: center;
+            color: #666666;
+            font-weight: bold;
+            margin-top: 15px;
+            line-height: 14px;
+            border-right: solid 1px #ffdcb9;
+        }
+        .li1{
+            width: 260px;
+        }
+        .li2{
+            width: 160px;
+        }
+        .li3{
+            width: 84px;
+        }
+        .li4,.li6{
+            width: 130px;
+        }
+        .li5{
+            width: 145px;
+        }
+        /*暂时没有数据表示*/
+        .emptyshow{
+            padding-top: 150px;
+            padding-bottom: 150px;
+            display: none;
+        }
+        .empty img{
+            margin: 0 auto;
+            max-width: 100%;
+            margin-left: 400px;
+            border: 0;
+            vertical-align: middle;
+        }
+        .empty p{
+            margin-top: 20px;
+            text-align: center;
+            color: #666;
+            word-wrap: break-word;
+        }
+        /*订单*/
+            /*未支付订单头部*/
+        .order-son-data{
+            width: 910px;
+           border: 1px solid #fbca99;
+            border-radius: 8px;
+            float: left;
+            margin: 10px 20px 0 18px;
+        }
+        .order-data-tou{
+            background: orange;
+            width: 100%;
+            height: 35px;
+            line-height: 35px;
+            opacity: 0.8;
+            border-radius: 8px 8px 0 0 ;
+        }
+        .dataname{
+            width: 100px;
+            height: 20px;
+            margin: 0 0 0 15px;
+            color: white;
+            opacity: 0.9;
+            /*border-right: 1px solid #172c45;*/
+        }
+        .data-name{
+            width: 100px;
+            height: 20px;
+            /*margin: 0 0 0 15px;*/
+            color: white;
+            opacity: 0.9;
+        }
+        .line3{
+            width: 1px;
+            height: 14px;
+            background: #172c45;
+            display: inline-block;
+            margin:2px 5px 0 5px ;
+        }
+        .call-play,.callplay-id{
+            color: white;
+            opacity: 0.9;
+            text-decoration: none;
+        }
+        .order-data-date{
+            float: right;
+            color: white;
+            opacity: 0.9;
+            margin-right: 20px;
+        }
+            /*未支付订单内容*/
+        .order-data-zjFt{
+
+        }
+        /*ul*/
+        .order-zj-data{
+            width: 100%;
+            height: 100px;
+            border-bottom: 1px solid #f3f3f3;
+        }
+        .order-zj-data .hg{
+            float: left;
+            text-align: center;
+            color: #666666;
+            /*color: #172c45;*/
+            font-weight: bold;
+            height: 100px;
+            line-height: 96px;
+        }
+        .order-data-li1,.order-data-li6,.oWzf{
+            float: left;
+            text-align: center;
+            color: #666666;
+            font-weight: bold;
+            height: 100px;
+            /*line-height: 96px;*/
+        }
+        .oWzf{
+            padding-top:30px;
+        }
+        .order-data-li1 .order-user-loge{
+            width: 50px;
+            height: 50px;
+        }
+        /*头像*/
+        .logeLi1{
+            float: left;
+            height: 100px;
+            line-height: 100px;
+            margin-left: 20px;
+        }
+        /*玩家信息*/
+        .order-user-con{
+            float: left;
+            width: 150px;
+            height: 100px;
+            text-align: left;
+        }
+        .order-username{
+            margin:32px 0 3px 20px;
+            height: 20px;
+            width: 150px;
+            text-decoration: none;
+            text-align: left;
+            color: #666666;
+            display: inline-block;
+        }
+       .order-usergrade{
+            margin-left: 20px;
+            text-align: left;
+        }
+        .order-user-name:hover,.order-username:hover{
+            color: orange;
+        }
+        /*操作*/
+        .order-data-li5,.order-data-li6{
+            margin: -7px 0 0 0;
+        }
+        .divli6{
+            float: left;
+            width: 150px;
+            height: 100px;
+        }
+        /*.payli6{*/
+            /*display: none;*/
+        /*}*/
+        .payli6,.qxli6,.see_stateli6,.finishli6,.assessli6,.Seeassessli6,.fixassessli6{
+           cursor: pointer;
+            width: 149px;
+           float: left;
+            text-align: center;
+            height: 20px;
+            margin: 5px 0 5px 0;
+            color: #666666;
+
+        }
+        .payli6:hover,.qxli6:hover,.see_stateli6:hover,.finishli6:hover,.assessli6:hover,.Seeassessli6:hover,.fixassessli6:hover{
+            color: orange;
+        }
+        .QUXIAO{
+            height: 100px;
+            line-height: 96px;
+        }
+        .order-xj{
+            margin-top:20px ;
+        }
+        /*进度*/
+        .order-speed{
+            float: left;
+            margin-left: 10px;
+        }
+        /*进度表示*/
+        .order-speedSee{
+            float: left;
+            margin-left: 100px;
+        }
+            /*进度头*/
+        .order-speedTou{
+           margin: 8px;
+            width: 666px;
+            height: 25px;
+        }
+        .order-speedTou li{
+            float: left;
+            width: 80px;
+            text-align: center;
+            margin:0 30px 0 0;
+        }
+        .see_stateli6.active,.close_stateli6.active01
+        {
+            color: orange;
+        }
+            /*中间*/
+        .order-speedCon{
+            float: left;
+            margin: 8px;
+            height: 30px;
+            width: 666px;
+        }
+        .speedCon-pLi0{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: gray;
+            float: left;
+            margin: 0 0 0 25px ;
+        }
+            /*圆圈*/
+        .ring{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: gray;
+            float: left;
+        }
+            /*进度条*/
+        .slip{
+            width:80px;
+            height: 10px;
+            background: gainsboro;
+            float: left;
+            margin:10px 0 ;
+        }
+        .speedCon-lineLi0,.speedCon-pLi0{
+            background: orange;
+        }
+            /*时间*/
+        .order-speedFt{
+            float: left;
+            margin: 8px;
+            width: 666px;
+            height: 40px;
+        }
+        .order-speedFt li{
+            float: left;
+            width: 95px;
+           margin-right:20px;
+        }
+        .showHide{
+            display: none;
+        }
+        .close_stateli6{
+            cursor: pointer;
+            display: none;
+        }
+        /*评价弹框*/
+        #morder-tbBox{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .morder-moban{
+            width: 100%;
+            height: 100%;
+            background:grey;
+            opacity: 0.9;
+        }
+        .morder-tk{
+            width: 300px;
+            height: 300px;
+            background: white;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -150px;
+            margin-left: -150px;
+            border-radius:12px;
+        }
+        .morder-nr{
+            width: 300px;
+            height: 220px;
+            /*line-height: 120px;*/
+            text-align: center;
+            font-size: 18px;
+            color: black;
+            opacity: 1;
+
+        }
+        .morder-wdpj{
+            height: 30px;
+            line-height: 30px;
+            margin: 30px 0 20px 0;
+            /*background: red;*/
+        }
+        .morder-nr .morder-fupf{
+           margin-top: 5px;
+            float: left;
+            margin-left: 15px;
+        }
+        .morder-zfs{
+            margin-top: 5px;
+            float: right;
+            border: 1px solid orange;
+            margin-right: 15px;
+        }
+        .morder-xpj{
+            width: 270px;
+            height: 80px;
+            margin: 15px 0 ;
+        }
+        .morder-jg{
+            width: 300px;
+            height: 70px;
+            /*background:#f3f3f3 ;*/
+            background: gainsboro;
+
+        }
+        .morder-qd,.morder-cal{
+            width: 90px;
+            height: 28px;
+            font-size:18px ;
+            color: black;
+            margin: 20px  15px 20px 35px;
+        }
+        .morder-qd:hover,.morder-cal:hover{
+            border: 1px solid #007DDB;
+            background: #bce8f1;
+        }
+        .morder-qd.active,.morder.active{
+            border: 2px solid #007DDB;
+        }
+    </style>
+    <!--倒计时代码引用-->
+    <script type="text/javascript" src="../js/countdown.js"></script>
+</head>
+<body>
+    <div id="order_box">
+        <div id="order-content">
+              <!--订单头部信息-->
+            <div id="orderTop" class="top">
+                <!--陪玩订单或者我的订单-->
+                <div class="order-title">
+                    <a href="../newPage/play_Order.html"><h3 class="paly_order">陪玩订单</h3></a>
+                    <span></span>
+                    <a href="#"><h3 class="me_order active">我的订单</h3></a>
+                </div>
+                <!--订单内容表头-->
+                <div class="order-con-head">
+                    <img style="width: 100%" class="line1" src="https://yundown.daofengdj.com/static/user/img/order/img_05.jpg" alt="">
+                    <ul class="info">
+                        <li class="li1"><span>订单信息</span></li>
+                        <li class="li2"><span>单价</span></li>
+                        <li class="li3"><span>数量</span></li>
+                        <li class="li4"><span>金额</span></li>
+                        <li class="li5"><span>订单状态</span></li>
+                        <li class="li6"><span>操作</span></li>
+                    </ul>
+                    <img style="width: 100%" class="line2" src="https://yundown.daofengdj.com/static/user/img/order/img_05.jpg" alt="">
+                </div>
+            </div>
+            <hr>
+            <table style="background-color: navajowhite;width: 920px;text-align: center" id="table">
+
+            </table>
+            <!--<ul class="order">
+
+            </ul>-->
+            <!--分页-->
+            <!--<div></div>-->
+            <!--暂时没有数据时-->
+            <div msg="emptyshow" class="empty emptyshow" >
+                <img src="https://yundown.daofengdj.com/static/public/img/none.png" alt="">
+                <p>暂时没有数据</p>
+            </div>
+        </div>
+    </div>
+    <!--评价的弹框-->
+    <div id="morder-tbBox" class="clearfix">
+        <div class="morder-moban">
+            <div class="morder-tk">
+                <div class="morder-nr">
+                    <h3 class="morder-wdpj" ><strong>我的评价</strong></h3>
+                    <p class="morder-fupf">服务评分
+                        <span class="glyphicon glyphicon-star star"></span>
+                        <span class="glyphicon glyphicon-star star"></span>
+                        <span class="glyphicon glyphicon-star star"></span>
+                        <span class="glyphicon glyphicon-star star"></span>
+                        <span class="glyphicon glyphicon-star star"></span>
+                    </p>
+                    <p class="morder-zfs"><span class="morder-hzfs">xx</span>分</p>
+                    <textarea class="morder-xpj"></textarea>
+                </div>
+                <div class="morder-jg">
+                    <button class="morder-qd active">确定</button>
+                    <button class="morder-cal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(function () {
+        $.ajax({
+            url: "searchUserOrder.doing",
+            dataType: "json",
+            success: function (data) {
+                $("#table").empty();
+                $.each(data, function (index, element) {
+                    var url="deleteUserOrder.doing?id="+element.id;
+                    $("#table").append("<tr><td>" + element.game_name + "</td>" +
+                        "<td>" + element.price + "</td>" +
+                        "<td>" + element.num + "</td>" +
+                        "<td>" + element.all_price + "</td>" +
+                        "<td>" + element.condition + "</td>" +
+                        "<td><a href='"+url+"'><input type='button' value='删除'/></a></td></tr>");
+                })
+            }
+            // error: function (data) {
+            //     $("#table").empty();
+            //     $.each(data, function (index, element) {
+            //         $("#table").append("<tr><td>英雄联盟</td>" +
+            //             "<td>10</td>" +
+            //             "<td>3</td>" +
+            //             "<td>30</td>" +
+            //             "<td>2</td>" +
+            //             "<td><input type='button' value='删除'/></td></tr>" +
+            //             "<tr><td>绝地求生</td>" +
+            //             "<td>15</td>" +
+            //             "<td>3</td>" +
+            //             "<td>45</td>" +
+            //             "<td>2</td>" +
+            //             "<td><input type='button' value='删除'/></td></tr>");
+            //     })
+            // }
+        })
+    })
+</script>
+</html>

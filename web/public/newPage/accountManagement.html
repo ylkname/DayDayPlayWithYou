@@ -1,0 +1,672 @@
+<!DOCTYPE html><!--账户管理，个人余额查询-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../util/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="../js/jquery-3.2.1.js"></script>
+    <script src="../util/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../css/double-date.css">
+    <script src="../js/double-date.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            text-decoration: none;
+            color: #666666;
+        }
+        body{
+            width: 100%;
+            height: 100%;
+            background: #f3f3f3;
+        }
+        #AMBox{
+            width: 1030px;
+            height: 100%;
+            /*border: 1px solid deeppink;*/
+            margin: 30px 45px;
+            background: white;
+            border-radius:10px;
+            padding: 40px;
+        }
+        /*标题*/
+        .AMTitle{
+            width:100%;
+            height: 50px;
+            border-bottom: 1px solid #f3f3f3;
+            line-height: 50px;
+            font-size: 20px;
+            color: black;
+        }
+        .AMTitle span{
+            color: black;
+        }
+        /*余额和充值*/
+        .AM-yAndP{
+            line-height:60px;
+            border-bottom: 3px solid #f3f3f3;
+            font-size: 16px;
+            /*background: red;*/
+        }
+        .AM-abalance{
+            font-size: 25px;
+            color: #ec5e55;;
+            margin-left: 10px;
+        }
+        .AM-ye{
+            float: left;
+        }
+        .AM-pay{
+            float: right;
+        }
+        .AM-pay-a{
+            border: 1px solid #f5511e;
+            color: #fff;
+            background-color: #f5511e;
+           padding:0 10px ;
+            border-radius: 3px;
+        }
+        /*筛选*/
+        .AMContent-screen{
+            width: 100%;
+            height: 56px;
+           padding: 20px 0 10px 0;
+            /*style="line-height: 100px;background: #c39361"*/
+        }
+        .AMContent-find{
+            /*style="float: left;overflow: hidden"*/
+            float: left;
+            /*overflow: hidden;*/
+        }
+        .AMouter{
+            margin-right:12px ;
+        }
+        .AMouter input{
+            border: 1px solid #fbca99;
+            border-radius: 4px;
+            /*margin-right:8px;*/
+        }
+        .AMContent-search{
+            border: 1px solid #fbca99;
+            width: 60px;
+            height: 24px;
+            border-radius: 4px;
+            background:#fbca99 ;
+        }
+        .AMContent-choose{
+            float: right;
+        }
+        .AMContent-choose li{
+            width: 80px;
+            height: 26px;
+            /*box-shadow: -3px 0px 0px #fbca99;*/
+            float: left;
+            border-radius: 3px;
+            border: 1px solid #fbca99;
+            color: #666;
+            text-align: center;
+            line-height: 26px;
+            margin-left: 5px;
+            cursor: pointer;
+
+        }
+        .AMContent-choose li:hover{
+            color: #fbca99;
+            box-shadow: -3px 0px 0px #fbca99;
+        }
+        .AMContent-choose li.active{
+             color: #fbca99;
+            box-shadow: -3px 0px 0px #fbca99;
+        }
+        /*内容头*/
+        .AMContent-head{
+            width: 980px;
+            height: 76px;
+
+        }
+        .AMContent-headTit{
+            width: 980px;
+            height: 33px;
+            margin-bottom: 0;
+
+        }
+        .AMContent-headTit li{
+            float: left;
+            text-align: center;
+            height: 13px;
+            color: #666666;
+            font-weight: bold;
+            margin: 10px 0px;
+            line-height: 14px;
+            border-right: solid 1px #ffdcb9;
+        }
+        .am1{
+            width: 230px;
+        }
+        .am2{
+            width: 95px;
+        }
+        .am3{
+            width: 220px;
+        }
+        .am4{
+            width: 200px;
+        }
+        .AC_jytype{
+            float: left;
+            display: none;
+            overflow: hidden;
+            line-height: 14px;
+            text-align: center;
+            color: #666666;
+            font-weight: bold;
+            height: 13px;
+            width: 89px;
+        }
+        .AC_jytype.active{
+            display: block;
+        }
+        .AMContent-headTit-li6{
+            border-right:0;
+            border-right: none;
+        }
+        .AMContent-head-data{
+            margin-top: 20px;
+        }
+        table{
+            border: 1px solid #ffe0b2;
+            border-radius: 3px;
+            background-color: #fff;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        tr{
+            overflow: hidden;
+            border-bottom: 1px solid #ffe0b2;
+        }
+        td{
+            text-align: center;
+            font-size: 14px;
+            color: #999;
+            padding: 18px 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="AMBox">
+        <div class="AMTitle"><strong><span>账户管理</span></strong></div>
+        <!--余额和充值-->
+        <div class="AM-yAndP" style="width: 100%;height: 60px;">
+            <div class="AM-ye"><strong>我的余额：</strong><strong><span class="AM-abalance">800</span></strong></div>
+            <div class="AM-pay"><a href="../page/recharge.jsp" class="AM-pay-a">充值</a></div>
+        </div>
+        <!--内容-->
+        <div class="AMContent">
+            <!--筛选-->
+            <div class="AMContent-screen" >
+                <div class="AMContent-find">
+                    <div style="float: left" class="AMouter outer clearfix">
+                        <div style="float: left;width:130px" class="date date1 fl" id="from">
+                            <input style="width: 120px;height: 24px;" class="AMContent-beging date-check" type="text" placeholder="开始时间"> -
+                        </div>
+                        <div style="float: left;width:120px" class="date fr" id="to">
+                            <input style="width: 120px; height: 24px;" class="AMContent-end date-check" type="text" placeholder="结束时间" >
+                        </div>
+                    </div>
+                    <button  class="AMContent-search"><span class="glyphicon glyphicon-search" ></span>搜索</button>
+                </div>
+                <ul class="AMContent-choose">
+                    <li class="AMContent-chooseAll active"><span class="glyphicon glyphicon-th-list AMContent-chooseAll-a"></span>全部</li>
+                    <li class="AMContent-chooseR"><span class="glyphicon glyphicon-plus-sign AMContent-chooseR-a"></span>收入</li>
+                    <li class="AMContent-chooseC" ><span class="glyphicon glyphicon-minus-sign AMContent-chooseC-a"></span>支出</li>
+                </ul>
+            </div>
+            <!--数据-头部-->
+            <div class="AMContent-head">
+                <img class="AMContent-line1" style="width: 955px;" src="https://yundown.daofengdj.com/static/user/img/service/img_05.jpg" alt="">
+                <ul class="AMContent-headTit">
+                    <li  class="AMContent-headTit-li0 am1">订单号</li>
+                    <li  class="AMContent-headTit-li2 am2">资金类型</li>
+                    <li  class="AMContent-headTit-li3 am2">金额</li>
+                    <li class="AMContent-headTit-li4 am2">
+                        <p class="AC_jytype active">交易类型</p>
+                        <p class="AC_jytype">接单交易</p>
+                        <p class="AC_jytype">消费交易</p>
+                    </li>
+                    <li class="AMContent-headTit-li5 am3">描述</li>
+                    <li class="AMContent-headTit-li6 am4">创建时间</li>
+                </ul>
+                <img class="AMContent-line2"  src="https://yundown.daofengdj.com/static/user/img/service/img_05.jpg" alt="">
+            </div>
+            <!--数据-->
+            <div class="AMContent-head-data">
+                <table class="AMContent-head-table">
+                    <tbody class="AMContent-head-tbody">
+                    </tbody>
+                </table>
+            </div>
+            <!--当没有数据的时候-->
+            <div class="follow-lost" style="padding-top: 150px;padding-bottom:150px;text-align: center;display: none">
+                <img src="https://yundown.daofengdj.com/static/public/img/none.png" alt="">
+                <p style="margin-top: 20px;text-align: center;color: #666;">当前列表为空</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // 页面加载的时候
+    function getzhgl(){
+        $.ajax({
+            url:'/getbusiness ',
+            type:'post',
+            // 到时候只需要传一个id号就好
+            data:{
+                U_id:parseInt(localStorage.myID)
+            },
+            success:function (res) {
+                $('.AMContent-head-tbody').text('');
+                if(res.error){
+                    alert(res.accountManagement)
+                }else{
+                    for(var i=0;i<res.data.length;i++){
+                        $('.AMContent-head-tbody').append(`<tr class="AMContent-head-tr">
+                            <td class="am1 td0">${res.data[i].dd}</td>
+                            <td class="am2 td0">${res.data[i].lx} </td>
+                            <td class="am2 td0">${res.data[i].money}</td>
+                            <td class="am2 td0">${res.data[i].jdtype}</td>
+                            <td class="am3 td0">${res.data[i].ms}</td>
+                            <td class="am4 td0">${res.data[i].date} </td>
+                        </tr>`)
+                    }
+                }
+
+            }
+        });
+    }
+    getzhgl();
+    // 全选
+    $('.AMContent-chooseAll').click(function () {
+        $('.AMContent-choose li').removeClass('active');
+        $(this).addClass('active');
+        getzhgl();
+        alert(1);
+    });
+    // 收入塞选
+    $('.AMContent-chooseR').click(function () {
+        $('.AMContent-choose li').removeClass('active');
+        $(this).addClass('active');
+        $.ajax({
+            url:'/sybusiness',
+            type:'post',
+            data:{
+                U_id:parseInt(localStorage.myID)
+                //用户id
+                //筛选类型：fundsTypes(资金类型)='收入'
+            },
+            success:function (res) {
+                $('.AMContent-head-tbody').text('');
+                if(res.error){
+                    alert(res.accountManagement)
+                }else{
+                    for(var i=0;i<res.data.length;i++){
+                        $('.AMContent-head-tbody').append(`<tr class="AMContent-head-tr">
+                            <td class="am1 td0">${res.data[i].dd}</td>
+                            <td class="am2 td0">${res.data[i].lx} </td>
+                            <td class="am2 td0">${res.data[i].money}</td>
+                            <td class="am2 td0">${res.data[i].jdtype}</td>
+                            <td class="am3 td0">${res.data[i].ms}</td>
+                            <td class="am4 td0">${res.data[i].date} </td>
+                        </tr>`)
+                    }
+                }
+
+            }
+        });
+        alert(2);
+    });
+    // 支出筛选
+    $('.AMContent-chooseC').click(function () {
+        $('.AMContent-choose li').removeClass('active');
+        $(this).addClass('active');
+        $.ajax({
+            url:'/zcbusiness',
+            type:'post',
+            data:{
+                U_id:parseInt(localStorage.myID)
+                //用户id
+                //筛选类型：fundsTypes(资金类型)='支出'
+            },
+            success:function (res) {
+                $('.AMContent-head-tbody').text('');
+                if(res.error){
+                    alert(res.accountManagement)
+                }else{
+                    for(var i=0;i<res.data.length;i++){
+                        $('.AMContent-head-tbody').append(`<tr class="AMContent-head-tr">
+                            <td class="am1 td0">${res.data[i].dd}</td>
+                            <td class="am2 td0">${res.data[i].lx} </td>
+                            <td class="am2 td0">${res.data[i].money}</td>
+                            <td class="am2 td0">${res.data[i].jdtype}</td>
+                            <td class="am3 td0">${res.data[i].ms}</td>
+                            <td class="am4 td0">${res.data[i].date} </td>
+                        </tr>`)
+                    }
+                }
+            }
+        });
+        alert(3);
+    });
+    // 时间筛选
+    $('.AMContent-search').click(function () {
+        // 结束时间
+        var oDate1=$('.AMContent-end').val();
+        // 开始时间？
+        var oDate2=$('.AMContent-beging').val();
+        if(oDate1.trim() && oDate2.trim()){
+            alert(7);
+            if($('.AMContent-chooseAll').hasClass('active')){
+                $('.AMContent-head-tbody').html('');
+                $.ajax({
+                    url:'/alldatebusiness',
+                    type:'post',
+                    data:{
+                        //用户
+                        U_id:parseInt(localStorage.myID),
+                        begingtime:oDate2+' 00:00:00',
+                        endtime:oDate1+' 00:00:00'
+                    },
+                    success:function (res) {
+                        if(res.error){
+                            alert(res.accountManagement)
+                        }else{
+                            for(var i=0;i<res.data.length;i++){
+                                $('.AMContent-head-tbody').append(`<tr class="AMContent-head-tr">
+                            <td class="am1 td0">${res.data[i].dd}</td>
+                            <td class="am2 td0">${res.data[i].lx} </td>
+                            <td class="am2 td0">${res.data[i].money}</td>
+                            <td class="am2 td0">${res.data[i].jdtype}</td>
+                            <td class="am3 td0">${res.data[i].ms}</td>
+                            <td class="am4 td0">${res.data[i].date} </td>
+                        </tr>`)
+                            }
+                            // 结束时间
+                            $('.AMContent-end').val('');
+                            // 开始时间？
+                            $('.AMContent-beging').val('');
+                        }
+                    }
+                })
+            }
+            else if($('.AMContent-chooseR').hasClass('active')){
+                $('.AMContent-head-tbody').html('');
+                $.ajax({
+                    url:'/srdatebusiness',
+                    type:'post',
+                    data:{
+                        //用户
+                        U_id:parseInt(localStorage.myID),
+                        begingtime:oDate2+' 00:00:00',
+                        endtime:oDate1+' 00:00:00'
+                    },
+                    success:function (res) {
+                        if(res.error){
+                            alert(res.accountManagement)
+                        }else{
+                            for(var i=0;i<res.data.length;i++){
+                                $('.AMContent-head-tbody').append(`<tr class="AMContent-head-tr">
+                            <td class="am1 td0">${res.data[i].dd}</td>
+                            <td class="am2 td0">${res.data[i].lx} </td>
+                            <td class="am2 td0">${res.data[i].money}</td>
+                            <td class="am2 td0">${res.data[i].jdtype}</td>
+                            <td class="am3 td0">${res.data[i].ms}</td>
+                            <td class="am4 td0">${res.data[i].date} </td>
+                        </tr>`);
+                            }
+                            // 结束时间
+                            $('.AMContent-end').val('');
+                            // 开始时间？
+                            $('.AMContent-beging').val('');
+                        }
+                    }
+                })
+            }
+            else if($('.AMContent-chooseC').hasClass('active')){
+                $('.AMContent-head-tbody').html('');
+                $.ajax({
+                    url:'/zcdatebusiness',
+                    type:'post',
+                    data:{
+                        //用户
+                        U_id:parseInt(localStorage.myID),
+                        begingtime:oDate2+' 00:00:00',
+                        endtime:oDate1+' 00:00:00'
+                    },
+                    success:function (res) {
+                        if(res.error){
+                            alert(res.accountManagement)
+                        }else{
+                            for(var i=0;i<res.data.length;i++){
+                                $('.AMContent-head-tbody').append(`<tr class="AMContent-head-tr">
+                            <td class="am1 td0">${res.data[i].dd}</td>
+                            <td class="am2 td0">${res.data[i].lx} </td>
+                            <td class="am2 td0">${res.data[i].money}</td>
+                            <td class="am2 td0">${res.data[i].jdtype}</td>
+                            <td class="am3 td0">${res.data[i].ms}</td>
+                            <td class="am4 td0">${res.data[i].date} </td>
+                        </tr>`)
+                            }
+                            // 结束时间
+                            $('.AMContent-end').val('');
+                            // 开始时间？
+                            $('.AMContent-beging').val('');
+                        }
+                    }
+                })
+            }
+        }
+        else if((!oDate1.trim()) && oDate2.trim()){
+            if($('.AMContent-chooseAll').hasClass('active')){
+                $('.AMContent-head-tbody').html('');
+                $.ajax({
+                    url:'/alldatebusiness1',
+                    type:'post',
+                    data:{
+                        //用户
+                        U_id:parseInt(localStorage.myID),
+                        begingtime:oDate2+' 00:00:00',
+                    },
+                    success:function (res) {
+                        if(res.error){
+                            alert(res.accountManagement)
+                        }else{
+                            for(var i=0;i<res.data.length;i++){
+                                $('.AMContent-head-tbody').append(`<tr class="AMContent-head-tr">
+                            <td class="am1 td0">${res.data[i].dd}</td>
+                            <td class="am2 td0">${res.data[i].lx} </td>
+                            <td class="am2 td0">${res.data[i].money}</td>
+                            <td class="am2 td0">${res.data[i].jdtype}</td>
+                            <td class="am3 td0">${res.data[i].ms}</td>
+                            <td class="am4 td0">${res.data[i].date} </td>
+                        </tr>`)
+                            }
+                            // 结束时间
+                            $('.AMContent-end').val('');
+                            // 开始时间？
+                            $('.AMContent-beging').val('');
+                        }
+                    }
+                })
+            }
+            else if($('.AMContent-chooseR').hasClass('active')){
+                $('.AMContent-head-tbody').html('');
+                $.ajax({
+                    url:'/srdatebusiness1',
+                    type:'post',
+                    data:{
+                        //用户
+                        U_id:parseInt(localStorage.myID),
+                        begingtime:oDate2+' 00:00:00',
+                    },
+                    success:function (res) {
+                        if(res.error){
+                            alert(res.accountManagement)
+                        }else{
+                            for(var i=0;i<res.data.length;i++){
+                                $('.AMContent-head-tbody').append(`<tr class="AMContent-head-tr">
+                            <td class="am1 td0">${res.data[i].dd}</td>
+                            <td class="am2 td0">${res.data[i].lx} </td>
+                            <td class="am2 td0">${res.data[i].money}</td>
+                            <td class="am2 td0">${res.data[i].jdtype}</td>
+                            <td class="am3 td0">${res.data[i].ms}</td>
+                            <td class="am4 td0">${res.data[i].date} </td>
+                        </tr>`)
+                            }
+                            // 结束时间
+                            $('.AMContent-end').val('');
+                            // 开始时间？
+                            $('.AMContent-beging').val('');
+                        }
+                    }
+                })
+            }
+            else if($('.AMContent-chooseC').hasClass('active')){
+                $('.AMContent-head-tbody').html('');
+                $.ajax({
+                    url:'/zcdatebusiness1',
+                    type:'post',
+                    data:{
+                        //用户
+                        U_id:parseInt(localStorage.myID),
+                        begingtime:oDate2+' 00:00:00',
+                    },
+                    success:function (res) {
+                        if(res.error){
+                            alert(res.accountManagement)
+                        }else{
+                            for(var i=0;i<res.data.length;i++){
+                                $('.AMContent-head-tbody').append(`<tr class="AMContent-head-tr">
+                            <td class="am1 td0">${res.data[i].dd}</td>
+                            <td class="am2 td0">${res.data[i].lx} </td>
+                            <td class="am2 td0">${res.data[i].money}</td>
+                            <td class="am2 td0">${res.data[i].jdtype}</td>
+                            <td class="am3 td0">${res.data[i].ms}</td>
+                            <td class="am4 td0">${res.data[i].date} </td>
+                        </tr>`)
+                            }
+                            // 结束时间
+                            $('.AMContent-end').val('');
+                            // 开始时间？
+                            $('.AMContent-beging').val('');
+                        }
+                    }
+                })
+            }
+        }
+        else if((!oDate2.trim()) && oDate1.trim()){
+            alert(7);
+            if($('.AMContent-chooseAll').hasClass('active')){
+                $('.AMContent-head-tbody').html('');
+                $.ajax({
+                    url:'/alldatebusiness2',
+                    type:'post',
+                    data:{
+                        //用户
+                        U_id:parseInt(localStorage.myID),
+                        endtime:oDate1+' 00:00:00'
+                    },
+                    success:function (res) {
+                        if(res.error){
+                            alert(res.accountManagement)
+                        }else{
+                            for(var i=0;i<res.data.length;i++){
+                                $('.AMContent-head-tbody').append(`<tr class="AMContent-head-tr">
+                            <td class="am1 td0">${res.data[i].dd}</td>
+                            <td class="am2 td0">${res.data[i].lx} </td>
+                            <td class="am2 td0">${res.data[i].money}</td>
+                            <td class="am2 td0">${res.data[i].jdtype}</td>
+                            <td class="am3 td0">${res.data[i].ms}</td>
+                            <td class="am4 td0">${res.data[i].date} </td>
+                        </tr>`)
+                            }
+                            // 结束时间
+                            $('.AMContent-end').val('');
+                            // 开始时间？
+                            $('.AMContent-beging').val('');
+                        }
+                    }
+                })
+            }
+            else if($('.AMContent-chooseR').hasClass('active')){
+                $('.AMContent-head-tbody').html('');
+                $.ajax({
+                    url:'/srdatebusiness2',
+                    type:'post',
+                    data:{
+                        //用户
+                        U_id:parseInt(localStorage.myID),
+                        endtime:oDate1+' 00:00:00'
+                    },
+                    success:function (res) {
+                        if(res.error){
+                            alert(res.accountManagement)
+                        }else{
+                            for(var i=0;i<res.data.length;i++){
+                                $('.AMContent-head-tbody').append(`<tr class="AMContent-head-tr">
+                            <td class="am1 td0">${res.data[i].dd}</td>
+                            <td class="am2 td0">${res.data[i].lx} </td>
+                            <td class="am2 td0">${res.data[i].money}</td>
+                            <td class="am2 td0">${res.data[i].jdtype}</td>
+                            <td class="am3 td0">${res.data[i].ms}</td>
+                            <td class="am4 td0">${res.data[i].date} </td>
+                        </tr>`)
+                            }
+                            // 结束时间
+                            $('.AMContent-end').val('');
+                            // 开始时间？
+                            $('.AMContent-beging').val('');
+                        }
+                    }
+                })
+            }
+            else if($('.AMContent-chooseC').hasClass('active')){
+                $('.AMContent-head-tbody').html('');
+                $.ajax({
+                    url:'/zcdatebusiness2',
+                    type:'post',
+                    data:{
+                        //用户
+                        U_id:parseInt(localStorage.myID),
+                        endtime:oDate1+' 00:00:00'
+                    },
+                    success:function (res) {
+                        if(res.error){
+                            alert(res.accountManagement)
+                        }else{
+                            for(var i=0;i<res.data.length;i++){
+                                $('.AMContent-head-tbody').append(`<tr class="AMContent-head-tr">
+                            <td class="am1 td0">${res.data[i].dd}</td>
+                            <td class="am2 td0">${res.data[i].lx} </td>
+                            <td class="am2 td0">${res.data[i].money}</td>
+                            <td class="am2 td0">${res.data[i].jdtype}</td>
+                            <td class="am3 td0">${res.data[i].ms}</td>
+                            <td class="am4 td0">${res.data[i].date} </td>
+                        </tr>`)
+                            }
+                            // 结束时间
+                            $('.AMContent-end').val('');
+                            // 开始时间？
+                            $('.AMContent-beging').val('');
+                        }
+                    }
+                })
+            }
+        }
+        else {
+            return
+        }
+    });
+
+</script>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html><!--头部-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../util/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="../util/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        /*头*/
+        .ar:hover{
+            color: #FA6543;
+
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        a:hover{
+            text-decoration: none;
+        }
+        .index-head{
+            width: 100%;
+            height: 80px;
+            background: white;
+        }
+        .index-logo{
+            /*position: absolute;
+            top: 15px;
+            left: 120px;*/
+            display: inline-block;
+            margin-top: 16px;
+            margin-left: 120px;
+        }
+        .header-navigation{
+            display: inline-block;/*
+            border: 1px solid #000;*/
+            margin-left: 120px;
+        }
+        .navigation-1{
+            margin-right: 20px;
+
+        }
+        .header-navigation-ip{
+            display: inline-block;
+            position: relative;
+        }
+        .header-navigation-ip input{
+            padding: 0 10px;
+            border-radius: 25px;
+            background-color: #f0f0f0;
+            display: inline-block;
+            line-height: 34px;
+            height: 34px;
+            font-size: 13px;
+            border: 1px solid #f0f0f0 ;
+            outline: none;
+        }
+        .header-navigation-ip img{
+            position: absolute;
+            top:10px;
+            right: 10px;
+            cursor: pointer;
+        }
+        /*尾*/
+        .index-bottom{
+            background-color: #535353;
+            position: relative;
+            width: 100%;
+            float: left;
+        }
+        .index-bottom-box{
+            width:1204px;
+            margin: 0 auto;
+            padding: 30px 0;
+            background-color: #535353;
+        }
+        .bottom-box-information{
+            color: #c9c9c9;
+            font-size: 15px;
+            margin-top: 30px;
+        }
+        .bottom-box-tel{
+            padding-right: 30px;
+            margin-left: 35px;
+            border-right: #bfbfbf solid 1px;
+        }
+        .bottom-box-telimg{
+            height: 18px;
+            width: 23px;
+            margin-right: 10px;
+            background: url("../image/index-img/icon.png") no-repeat;
+            background-position: -108px 0;
+            display: inline-block;
+        }
+        .bottom-box-tn{
+            font-size: 17px;
+            margin-right: 14px;
+        }
+        .bottom-box-t{
+            font-size: 13px;
+        }
+        .bottom-box-qq{
+            cursor: pointer;
+            padding-left: 30px;
+        }
+        .bottom-box-qqimg{
+            margin-right: 10px;
+            height: 18px;
+            width: 19px;
+            background: url("../image/index-img/icon.png");
+            background-position: -89px 0;
+        }
+        .bottom-box-qqnum{
+            font-size: 17px;
+            margin-right: 14px;
+        }
+        .bottom-box-detailed{
+            padding-left: 30px;
+        }
+        .bottom-box-detailedtime{
+            font-size: 13px;
+        }
+        .bottom-box-but{
+            margin-left: 40px;
+        }
+        .help{
+            width: 92px;
+            height: 26px;
+            background-color: #3c3c3c;
+            line-height: 26px;
+            text-align: center;
+            border: #707070 solid 1px;
+            border-radius: 4px;
+            margin-left: 16px;
+            font-size: 13px;
+            color: #bfbfbf;
+        }
+        .help:hover{
+            color: #bfbfbf;
+            background: #4D4C4C;
+        }
+        .bottom-box-copy{
+            color: #959595;
+            font-size: 12px;
+            margin-top: 34px;
+            text-align: center;
+        }
+        .fl{
+            float: left;
+        }
+        .fr{
+
+        }
+    </style>
+</head>
+<body>
+
+<!------------------头部---------------------------->
+<div class="index-head">
+    <!--logo部分-->
+    <div class="index-logo">
+        <a href="javascript:;">
+            <img src="../image/index-img/yuewanlogo.png" alt="">
+        </a>
+    </div>
+    <!--导航内容部分-->
+    <div class="header-navigation">
+        <a href="javascript:;" class="navigation-1 ar">首页</a>
+        <a href="javascript:;" class="navigation-1 ar">约陪玩</a>
+        <a href="javascript:;" class="navigation-1 ar">9.9专区</a>
+        <a href="javascript:;" class="navigation-1 ar">充值</a>
+        <div class="header-navigation-ip">
+            <input type="text" placeholder="搜索昵称、uid、靓号">
+            <img src="../image/index-img/search.png" alt="" class="search">
+        </div>
+    </div>
+    <div class="header-navigation">
+        <a class="ar" href="">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            登录&nbsp;&nbsp;|&nbsp;&nbsp;注册</a>
+    </div>
+    <div class="header-navigation" >
+        <a href="" class="ar">
+            <img src="../image/index-img/message.png" alt="">
+            消息中心
+        </a>
+    </div>
+</div>
+<!--------------------底部------------------------>
+<!--<div class="index-bottom">
+    <div class="index-bottom-box">
+        <a href="javascript:;">
+            <img class="fl" src="./../image/index-img/consume1.jpg" alt="">
+        </a>
+        <a href="javascript:;">
+            <img class="fl"  src="./../image/index-img/consume2.jpg" alt="">
+        </a>
+        <a href="javascript:;">
+            <img class="fl"  src="./../image/index-img/consume3.jpg" alt="">
+        </a>
+        <a href="javascript:;">
+            <img class="fl"  src="./../image/index-img/consume4.jpg" alt="">
+        </a>
+        <div class="clearfix"></div>
+        <div class="bottom-box-information">
+            <div class="bottom-box-tel fl">
+                <i class="bottom-box-telimg"></i>
+                客服电话
+                <span class="bottom-box-tn">010-68608228</span>
+                <span class="bottom-box-t">咨询时间：7X24小时</span>
+            </div>
+            <div class="bottom-box-qq fl">
+                <i class="bottom-box-qqimg"></i>
+                客服QQ：
+                <span class="bottom-box-qqnum">800184580</span>
+            </div>
+            <div class="bottom-box-detailed fl">
+                <span class="bottom-box-detailedtime">咨询时间：7X24小时</span>
+            </div>
+            <div class="bottom-box-but fl">
+                <a class="fl help" href="javascript:;">帮助中心</a>
+                <a class="fl help" href="javascript:;">服务保障</a>
+                <a class="fl help" href="javascript:;">关于我们</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="bottom-box-copy">
+            京ICP备18042855号 Copyright 2014-2020 TaoLe Corporation,All Rights Reserved
+            <br>
+            北京陶乐科技有限公司，专业陪练为玩家提供各种热门游戏陪练陪玩服务，年轻人喜爱的游戏陪玩平台
+            <br>
+            地址：北京市石景山区鲁谷路74号中国瑞达大厦6层M601室
+        </div>
+    </div>
+</div>-->
+</body>
+<script>
+
+</script>
+</html>

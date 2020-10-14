@@ -1,0 +1,496 @@
+<!DOCTYPE html><!--我的关注页面-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../util/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="../util/jquery-3.4.0.js"></script>
+    <script src="../util/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            text-decoration: none;
+            color: #666666;
+        }
+        body{
+            background: #f3f3f3;
+            width:100%;
+        }
+        .followTit{
+            width: 1100px;
+            background: #f3f3f3;
+            font-size: 25px;
+            height: 30px;
+            padding-left: 45px;
+            line-height: 30px;
+            margin-bottom: 15px;
+            margin-top: 40px;
+        }
+        .followTit-mylove{
+            float: left;
+            color: #222222;
+            border-left: 2px solid #de6439;
+            padding-left: 10px;
+            /*background:#de6439;*/
+        }
+        #followBox{
+            width: 1100px;
+            background: white;
+            /*height: 100%;*/
+            overflow: hidden;
+            margin: 0 0 0 45px;
+            /*height: 700px;*/
+        }
+
+        .followContext{
+            border-bottom: #cccccc dashed 1px;
+            margin-bottom: 20px;
+            margin-top: 30px;
+            height: 40px;
+        }
+        .followContext-div1{
+            font-size: 20px;
+            color: #333333;
+            padding-bottom: 10px;
+            margin-left: 10px;
+            float: left;
+        }
+        .followContext-div2{
+            float: right;
+        }
+        .followContext-div2-div{
+            font-size: 12px;
+            color: #666666;
+            line-height: 26px;
+            margin-top: 2px;
+            float: left;
+            width: 60px;
+        }
+        .follow-allCheck-la span{
+            margin: 0 3px;
+        }
+        .follow-allCheck{
+            margin-top: 6px;
+            width: 17px;
+            height: 17px;
+            margin-right: 4px;
+            cursor: pointer;
+            float: left;
+        }
+        .followContext-div2 span{
+            float: left;
+        }
+        .nofollow{
+            width: 100px;
+            height: 30px;
+            margin-top: -3px;
+            margin-right: 20px;
+            line-height: 20px;
+        }
+        .nofollow:hover{
+            background: #fd7c4f;
+            color: gainsboro;
+        }
+        .followshow{
+            margin-left: 16px;
+            overflow: hidden;
+            height: 100%;
+        }
+        .followshow li{
+            width: 344px;
+            height: 164px;
+            background:#f3f3f3 ;
+            float: left;
+            overflow: hidden;
+            margin-top: 20px;
+            margin-right: 16px;
+        }
+
+        .followshow input{
+            float: right;
+            width: 17px;
+            height: 17px;
+            display: none;
+            /*margin: 10px 150px 0 0;*/
+        }
+        .followshow-con{
+            margin: 22px 15px 15px 15px;
+            /*background: yellow;*/
+        }
+        .followshow-left{
+            width: 104px;
+            height: 120px;
+            line-height: 120px;
+            float: left;
+            border-right: 1px solid #d5d5d5;
+        }
+        .followshow-loge{
+            width: 76px;
+            height: 76px;
+            margin-left:10px;
+            margin-right: 15px;
+        }
+        .followshow-play{
+            float: left;
+            width: 150px;
+            height: 20px;
+            margin:10px 0 13px 15px;
+            font-size:18px;
+            color: black;
+        }
+        .followshow-dj{
+            float: left;
+            position: relative;
+        }
+        .followshow-dj-sum{
+            float: left;
+            position: absolute;
+            color: #af5320;
+            font-size: 12px;
+            margin-left: 45px;
+            line-height: 30px;
+        }
+        .followshow-dj-img{
+            margin: -3px 0 8px 15px;
+        }
+        .followshow-dj-name{
+            font-size: 12px;
+        }
+        .followshow-dj-gz{
+            margin: 5px 0 20px 15px ;
+            /*background:#de6439;*/
+            background: #fd7c4f;
+            color: white;
+            border-radius: 5px;
+            border: 1px solid #fd7c4f;
+            width: 100px;
+            height: 30px;
+        }
+        /*取消关注表*/
+        #follow-tbBox{
+            width: 100%;
+            height: 100%;
+            border: 1px solid red;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .follow-moban{
+            width: 100%;
+            height: 100%;
+            background:grey;
+            opacity: 0.8;
+        }
+        .follow-tk{
+            width: 300px;
+            height: 200px;
+            background: white;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -200px;
+            margin-left: -200px;
+            border-radius:12px;
+        }
+        .follow-nr{
+            width: 300px;
+            height: 120px;
+            line-height: 120px;
+            text-align: center;
+            font-size: 18px;
+            color: black;
+            opacity: 1;
+
+        }
+        .follow-jg{
+            width: 300px;
+            height: 80px;
+            /*background:#f3f3f3 ;*/
+            background: gainsboro;
+
+        }
+        .follow-qd,.follow-cal{
+            width: 90px;
+            height: 28px;
+            font-size:18px ;
+            color: black;
+            margin: 25px  15px 25px 35px;
+        }
+        .follow-qd:hover,.follow-cal:hover{
+            border: 1px solid #007DDB;
+            background: #bce8f1;
+        }
+        .follow-qd.active,.follow-cal.active{
+            border: 2px solid #007DDB;
+        }
+        /*.clearfix:after{*/
+            /*content: '';*/
+            /*clear: both;*/
+            /*display: block;*/
+        /*}*/
+    </style>
+</head>
+<body>
+    <div class="followTit clearfix">
+          <a href="#" class="followTit-mylove">我的关注</a>
+    </div>
+    <div id="followBox" class="clearfix">
+            <div class="followContext">.
+                <div class="followContext-div1">全部关注（<span class="followContext-mun"></span>）</div>
+                <div class="followContext-div2">
+                    <div class="followContext-div2-div">
+                         <label class="follow-allCheck-la">
+                              <input type="checkbox" class="follow-allCheck" ><span>全选</span>
+                         </label>
+                    </div>
+                        <button class="btn nofollow">
+                            <img src="https://res.tuwan.com/templet/play/attent/images/follow.png" alt="">
+                            取消关注
+                        </button>
+                </div>
+            </div>
+        <!--关注的人员内容-->
+            <ul class="followshow" >
+
+                <!--<li class="followshow-li0">-->
+                    <!--<input type="checkbox" class="followshow-checkli0">-->
+                    <!--<div class="followshow-con" style="width: 300px;">-->
+                        <!--<div class="followshow-left">-->
+                            <!--<img class="followshow-loge img-circle" src="https://ucavatar.tuwan.com/data/avatar/001/20/43/25_avatar_middle.jpg?random=1560747487" alt="">-->
+                        <!--</div>-->
+                        <!--<div class="followshow-riget">-->
+                            <!--<a href="#" class="followshow-play">我的宝贝xxxxx</a>-->
+                            <!--<div class="followshow-dj">-->
+                                <!--&lt;!&ndash;<span class="followshow-dj-sum">5</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<img class="followshow-dj-img" src="https://res.tuwan.com/templet/play/teacher/images/jibie_03.png?0009">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="followshow-dj-name">魅力值:55556666</span>&ndash;&gt;-->
+                            <!--</div>-->
+                            <!--<button class="followshow-dj-gz">-->
+                                <!--<img src="https://res.tuwan.com/templet/play/attent/images/follow_hover.png" alt="">取消关注</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li class="followshow-li0">-->
+                    <!--<input type="checkbox" class="followshow-checkli0">-->
+                    <!--<div class="followshow-con" style="width: 300px;">-->
+                        <!--<div class="followshow-left">-->
+                            <!--<img class="followshow-loge img-circle" src="https://ucavatar.tuwan.com/data/avatar/002/08/67/57_avatar_middle.jpg?random=1561018455" alt="">-->
+                        <!--</div>-->
+                        <!--<div class="followshow-riget">-->
+                            <!--<a href="#" class="followshow-play">我的宝贝xxxxx</a>-->
+                            <!--<div class="followshow-dj">-->
+                                <!--<p class="followshow-dj-sum">5</p>-->
+                                <!--<img class="followshow-dj-img" src="https://res.tuwan.com/templet/play/teacher/images/jibie_03.png?0009">-->
+                                <!--<span class="followshow-dj-name">魅力值:55556666</span>-->
+                            <!--</div>-->
+                            <!--<button class="followshow-dj-gz">-->
+                                <!--<img src="https://res.tuwan.com/templet/play/attent/images/follow_hover.png" alt="">取消关注</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li class="followshow-li0">-->
+                    <!--<input type="checkbox" class="followshow-checkli0">-->
+                    <!--<div class="followshow-con" style="width: 300px;">-->
+                        <!--<div class="followshow-left">-->
+                            <!--<img class="followshow-loge img-circle" src="https://ucavatar.tuwan.com/data/avatar/002/08/60/90_avatar_middle.jpg?random=1561011038" alt="">-->
+                        <!--</div>-->
+                        <!--<div class="followshow-riget">-->
+                            <!--<a href="#" class="followshow-play">我的宝贝xxxxx</a>-->
+                            <!--<div class="followshow-dj">-->
+                                <!--<p class="followshow-dj-sum">5</p>-->
+                                <!--<img class="followshow-dj-img" src="https://res.tuwan.com/templet/play/teacher/images/jibie_03.png?0009">-->
+                                <!--<span class="followshow-dj-name">魅力值:55556666</span>-->
+                            <!--</div>-->
+                            <!--<button class="followshow-dj-gz">-->
+                                <!--<img src="https://res.tuwan.com/templet/play/attent/images/follow_hover.png" alt="">取消关注</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+
+            </ul>
+        <!--没有关注的时候-->
+            <div class="follow-lost" style="padding-top: 150px;padding-bottom:150px;text-align: center;">
+                <img src="https://yundown.daofengdj.com/static/public/img/none.png" alt="">
+                <p style="margin-top: 20px;text-align: center;color: #666;">当前列表为空</p>
+            </div>
+   </div>
+    <!--关注弹框-->
+    <div id="follow-tbBox" class="clearfix">
+        <div class="follow-moban">
+            <div class="follow-tk">
+              <div class="follow-nr">你确定要取消关注吗？</div>
+              <div class="follow-jg">
+                  <button class="follow-qd active">确定</button>
+                  <button class="follow-cal">取消</button>
+              </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--</div>-->
+</body>
+<script>
+    // 当页面 加载的时候请求全部数据
+    function addfollow(){
+        // if($('.followshow li').length==0){
+        //     $('.follow-lost').css({'display':'block'});
+        //     $('.followshow').css({'display':'none'});
+        //     $('.followContext-mun').text(0);
+        // }else{
+        $('.follow-lost').css({'display':'none'});
+        $('.followshow').css({'display':'block'});
+        $.ajax({
+            url:'/getxmfollow',
+            type:'post',
+            data:{
+                FO_uid:parseInt(localStorage.myID)
+            },
+            success:function (res) {
+                if(res.error){
+                    alert('数据不存在');
+                    $('.followshow').css({'display':'none'});
+                    $('.follow-lost').css({'display':'block'});
+                }else{
+                    $('.followshow').text('');
+                    for(var i=0;i<res.data.length;i++){
+                        $('.followshow').append(`<li class="followshow-li0">
+                    <input type="checkbox" class="followshow-checkli0">
+                    <div class="followshow-con" style="width: 300px;">
+                        <div class="followshow-left">
+                            <img class="followshow-loge img-circle" src=${res.data[i].U_photo} alt="">
+                        </div>
+                        <div class="followshow-riget">
+                            <a href="#" class="followshow-play">${res.data[i].U_falsename}</a>
+                            <div class="followshow-dj">
+                                <p class="followshow-dj-sum">5</p>
+                                <img class="followshow-dj-img" src="https://res.tuwan.com/templet/play/teacher/images/jibie_03.png?0009">
+                                <span class="followshow-dj-name">魅力值:55556666</span>
+                            </div>
+                            <button class="followshow-dj-gz">
+                                <img src="https://res.tuwan.com/templet/play/attent/images/follow_hover.png" alt="">取消关注</button>
+                        </div>
+                    </div>
+                </li>`);
+                        $('.followContext-mun').text(res.data.length);
+
+                    }
+                }
+
+            }
+
+        });
+
+        // }
+    }
+    // 页面加载
+    addfollow();
+    // 全选
+    $('.follow-allCheck').click(function () {
+        // 如果全选checkbox被选中
+        if($('.follow-allCheck').prop("checked")==true){
+            $('.followshow-checkli0').css({'display':'block','checked':'true'});
+            $('.followshow-checkli0').attr("checked","checked");
+        }
+        // 如果全选checkbox未选中
+        if($('.follow-allCheck').prop("checked")==false){
+            $('.followshow-checkli0').css({'display':'none'});
+            $('.followshow-checkli0').removeAttr("checked");
+        }
+    });
+    // 确定全选
+    $('.nofollow').click(function (event) {
+        event.stopPropagation();
+        // 判断全选checkbox受是否被选中
+        if($('.follow-allCheck').prop("checked")==true){
+            //   $('#follow-tbBox').css({'display':'block'});
+            if(confirm('您确定要取消吗')) {
+                $.ajax({
+                    url:'/qbqxfollow',
+                    type:'post',
+                    data:{
+                        FO_uid:parseInt(localStorage.myID),
+                    },
+                    success:function (res) {
+                        if(res.error){
+                            alert(res.follow);
+                            $('.follow-lost').css({'display':'none'});
+                            $('.followshow').css({'display':'block'});
+                        }else{
+                            alert(res.data);
+                            // alert('取消关注成功');
+                            $('.follow-lost').css({'display':'block'});
+                            $('.followContext-mun').text(0);
+                            $('.followshow').css({'display':'none'});
+                            $('.follow-allCheck').removeAttr("checked");
+                        }
+                    }
+                })
+            }
+        }
+    });
+
+    //单选
+    $('.followshow').on('click','.followshow-dj-gz',function () {
+        var q=$(this).parents("li").index();
+        $('li').removeClass('dj');
+        // 获取当前点击对象的li，在给li添加一个class=dj
+        $('li:eq('+$(this).parents("li").index()+')').addClass('dj');
+        // 在找出li下面的关注陪玩头像地址，发送给后台，
+        var z=$('.dj .followshow-loge').attr('src');
+        // 显示取消关注弹框
+        //$('#follow-tbBox').css({'display':'block'});
+        if(confirm('您确定要取消吗')) {
+            $.ajax({
+                url:'/dgqxfollow',
+                type:'post',
+                data:{
+                    U_photo:z
+                },
+                success:function (res) {
+                    if(res.error){
+                        alert('未找到此用户');
+                    }else{
+                        var FO_puid=res.data[0].U_id;
+                        $.ajax({
+                            url:'/dgqxfollow2',
+                            type:'post',
+                            data:{
+                                FO_uid:parseInt(localStorage.myID),
+                                FO_puid:FO_puid
+                            },
+                            success:function (res) {
+                                if(res.error){
+                                    alert(res.data);
+                                }
+                                else{
+                                    if($('.followshow').length==0){
+                                        $('.follow-lost').css({'display':'block'});
+                                        $('.followshow').css({'display':'none'});
+                                        $('.followshow').text('');
+                                        $('.followContext-mun').text(0);
+                                    }else{
+                                        alert('取消关注成功');
+                                        $('.follow-lost').css({'display':'none'});
+                                        $('.followshow').css({'display':'block'});
+                                        addfollow();
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        };
+        alert(5);
+    });
+    // 不取消关注
+    $('#follow-tbBox').on('click','.follow-cal',function () {
+        $('#follow-tbBox').css({'display':'none'});
+        $('.follow-allCheck').removeAttr("checked");
+    });
+
+</script>
+</html>

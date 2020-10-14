@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#tutor_box {
+  width: 70%;
+  padding-left: 214px;
+  padding-top: 50px;
+  /*padding-right: 10%;*/
+  background-color: #F2F2F2;
+}
+#tutor {
+  background-color: white;
+  border-radius: 10px;
+}
+h3 {
+  margin-left: 30px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+#finalImg {
+  height: 70px;
+  width: 70px;
+  border-radius: 70px;
+}
+li {
+  overflow: hidden;
+  margin-left: 20px;
+  width: 800px;
+  height: 60px;
+  line-height: 60px;
+}
+.border {
+  border-radius: 5px;
+  border: 1px solid #DBDBDB;
+  outline: none;
+  width: 150px;
+}
+#li_pic {
+  margin-left: 100px ;
+  height: 120px;
+  width: 800px;
+  line-height: normal;
+}
+#tutor_pic {
+  width: 70px;
+  height: 70px;
+  border-radius: 70px;
+  padding: 5px;
+  margin-top: 10px;
+  float: left;
+}
+#tutor_pic_btn {
+  float: left;
+  margin-top: 20px;
+  margin-left: 20px ;
+}
+.FIn {
+  color: red;
+  margin-right: 10px;
+  font-size: 14px;
+}
+.OP {
+  display: inline-block;
+  width: 100px;
+  text-align: left;
+}
+.pic {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+}
+#tutor_pic2 {
+  display: inline-block;
+  vertical-align: -85px;
+}
+#li_pic2 {
+  height: 150px;
+}
+#tutor_btn {
+  margin-left: 20%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  display: inline-block;
+  border-radius: 3px;
+  width: 100px;
+  height: 30px;
+  background: #f5501e;
+  font-size: 20px;
+  color: white;
+  border: none;
+}
+#tutor-games,
+#tutor-levels {
+  height: 80px;
+}
+#tutor-level {
+  width: 80px;
+}
+.OP-games {
+  width: 130px;
+}
+#tutor-test,
+#tutor-level {
+  margin-left: 10px;
+  border-radius: 3px;
+  width: 120px;
+}
+#tutor_pic3 {
+  display: inline-block;
+  vertical-align: top;
+}
+#li_pic3 {
+  height: 150px;
+}
+#tutor-person {
+  height: 150px;
+}
+#person-con {
+  vertical-align: -40px;
+  resize: none;
+  border-radius: 5px;
+}
+/*# sourceMappingURL=tutor.css.map */

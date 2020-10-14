@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+#padding {
+  width: 75%;
+  padding-left: 214px;
+  padding-top: 50px;
+  background-color: #F2F2F2;
+}
+#box {
+  background: white;
+  padding-left: 10px;
+  border-radius: 10px;
+}
+#tabs li {
+  float: left;
+  margin-right: 20px;
+  cursor: pointer;
+}
+#tabs {
+  overflow: hidden;
+}
+.tab_header div {
+  float: left;
+  width: 22%;
+  height: 44px;
+  line-height: 44px;
+  font-size: 16px;
+  text-align: center;
+}
+.tab_header {
+  overflow: hidden;
+}
+h3 {
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.smallPic {
+  display: inline-block;
+  vertical-align: middle;
+}
+.opt {
+  height: 30px;
+  display: inline-block;
+  border-bottom: 2px solid red;
+}
+.tab2 {
+  display: none;
+}
+.tab_con1 div {
+  float: left;
+  width: 22%;
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px;
+  text-align: center;
+}
+.tab_con2 div {
+  float: left;
+  width: 22%;
+  height: 60px;
+  line-height: 60px;
+  font-size: 16px;
+  text-align: center;
+}
+.tab_1_con,
+.tab_2_con {
+  height: 300px;
+}
+.tab_con2 {
+  overflow: hidden;
+}
+.pages {
+  margin-left: 40%;
+  overflow: hidden;
+}
+.pages li {
+  float: left;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-bottom: 20px;
+  height: 20px;
+  width: 30px;
+  text-align: center;
+}
+.pageNum {
+  background: #00a0e9;
+  color: white;
+}
+/*# sourceMappingURL=gift.css.map */
